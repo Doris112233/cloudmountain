@@ -1,0 +1,121 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/npm-debug.log*
+/yarn-error.log
+/yarn.lock
+/package-lock.json
+
+# production
+/dist
+
+# misc
+.DS_Store
+
+# umi
+/src/.umi
+/src/.umi-production
+/src/.umi-test
+/.env.local
+
+# Large files and assets that shouldn't be tracked
+# Images and media files
+public/images/**/*.png
+public/images/**/*.jpg
+public/images/**/*.jpeg
+public/images/**/*.gif
+public/images/**/*.svg
+public/images/**/*.ico
+
+# Reports and documents
+public/reports/**/*.pdf
+public/reports/**/*.jpg
+public/reports/**/*.jpeg
+public/reports/**/*.png
+
+# Audio files
+public/audio/**/*
+
+# Large binary files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# nyc test coverage
+.nyc_output
+
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test
+.env.production
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port

@@ -1,0 +1,141 @@
+@import '../../base.less';
+
+.article-container {
+  margin: -24px -24px 0;
+}
+
+.image-container {
+  width: 100vw;
+  position: relative;
+  // display: inline-block;
+  // object-fit: fill;
+}
+
+.title-img {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  overflow: clip;
+  transition: transform 0.7s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.title-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  width: 100%;
+  padding: 0 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+
+  @media (max-width: 767px) {
+    font-size: 1.25em;
+    white-space: normal;
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    font-size: 2em;
+  }
+
+  @media (min-width: 1025px) {
+    font-size: 4em;
+  }
+}
+
+.tianxing-title {
+  color: @primary-color;
+  text-align: center;
+
+  @media (max-width: 767px) {
+    font-size: 1em;
+    white-space: pre;
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    font-size: 1.5em;
+  }
+
+  @media (min-width: 1025px) {
+    font-size: 2em;
+  }
+}
+
+// Card styling for investigation projects
+.reason-section {
+  margin-bottom: 60px;
+}
+
+.project-card {
+  margin-bottom: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f0f0f0;
+
+  .tianxing-sub-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: @primary-color;
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: normal;
+    @media (max-width: 767px) {
+      font-size: 1em;
+    }
+  }
+
+  .card-content {
+    padding: 0 16px;
+  }
+
+  .section-item {
+    margin-bottom: 16px;
+
+    .section-title {
+      color: @primary-color;
+      font-size: 16px;
+      font-weight: 600;
+      @media (max-width: 767px) {
+        font-size: 1em;
+      }
+    }
+
+    .section-content {
+      margin-top: 8px;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+  }
+}
+
+.investigation-container {
+  .ant-col {
+    @media (max-width: 767px) {
+      padding: 0 8px;
+    }
+  }
+}
+
+.tianxing-goal {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-top: 24px;
+    padding-left: 1em;
+    text-indent: -0.7em;
+  }
+
+  li::before {
+    font-size: 20px;
+    content: '• ';
+    color: @primary-color; /* or whatever color you prefer */
+  }
+}

@@ -1,0 +1,134 @@
+.container {
+  padding: 40px;
+  background: #419be0;
+  //margin-bottom: 50px;
+}
+
+.section-archeology {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-archeology-container {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-archeology-header {
+  display: flex;
+  border-bottom: 4px solid @primary-color;
+  display: inline-block;
+  text-align: center;
+  // margin: 0 0 40px 0;
+  padding: 0 50px 5px 50px;
+  h1 {
+    color: #000;
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    margin: 0;
+    @media (max-width: 767px) {
+      font-size: 20px;
+    }
+  }
+}
+
+.section-archeology-content {
+  display: flex;
+  max-width: 85%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.slick-slide img {
+  margin: auto;
+}
+
+.archiveItem {
+  min-width: 400px;
+}
+
+.full-page {
+  margin: -24px 0 50px;
+}
+
+.section-archeology {
+  max-width: 90%;
+  margin: 0 auto 60px auto;
+  padding: 40px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.text-section {
+  flex: 2;
+  font-size: 15px;
+  line-height: 1.8;
+  text-align: left;
+  justify-content: center;
+  align-items: center;
+  p {
+    color: #000;
+  }
+}
+
+.vertical-image {
+  // flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.vertical-image img {
+  max-width: 200px;
+  max-height: auto;
+  height: auto;
+  border-radius: 8px;
+  padding: 0;
+  margin: 0;
+}
+
+.image-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin: 20px 0;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.image-row img {
+  width: 400px;
+  height: auto;
+  border-radius: 8px;
+  @media (max-width: 767px) {
+    width: 300px;
+  }
+}
+
+.side-text {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}

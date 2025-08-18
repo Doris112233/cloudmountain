@@ -1,0 +1,124 @@
+@import '../../base.less';
+
+.article-container {
+  margin: -24px -24px 0;
+}
+
+.overview-container {
+  background-color: #fff;
+  padding: 60px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.overview-title {
+  display: flex;
+  border-bottom: 4px solid @primary-color;
+  display: inline-block;
+  text-align: center;
+  margin: 0 0 40px 0;
+  padding: 0 50px 5px 50px;
+  h2 {
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    margin: 0;
+    @media (max-width: 767px) {
+      font-size: 20px;
+    }
+  }
+}
+
+.overview-content {
+  font-size: 15px;
+  font-weight: 400;
+  color: #000;
+  line-height: 2;
+  width: 80%;
+  padding-bottom: 0px;
+  @media (max-width: 767px) {
+    font-size: 15px;
+    width: 100%;
+  }
+}
+
+.overview-image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding-bottom: 150px;
+}
+
+.overview-image-card {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+
+  .image-container {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: clip;
+    cursor: pointer;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.2);
+
+    h3 {
+      margin-bottom: 16px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  }
+}
+
+.learn-more-btn {
+  align-self: center;
+  background-color: #fff;
+  border: none;
+  color: black;
+  border-radius: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-weight: 500;
+  font-size: 15px;
+  height: 40px;
+  @media (max-width: 767px) {
+    font-size: 15px;
+    height: 30px;
+  }
+}
