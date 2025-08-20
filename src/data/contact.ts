@@ -1,28 +1,20 @@
-import wechat from '../../public/images/contact/wechat.png';
-import wechat_qr from '../../public/images/contact/wechat_qr.jpg';
-import weibo from '../../public/images/contact/weibo.png';
-import weibo_qr from '../../public/images/contact/weibo_qr.png';
-import tiktok from '../../public/images/contact/tiktok.png';
-import tiktok_qr from '../../public/images/contact/tiktok_qr.jpg';
-import bilibili from '../../public/images/contact/bilibili.png';
-import bilibili_qr from '../../public/images/contact/bilibili_qr.jpg';
-import rectlogo from '../../public/images/contact/rectlogo.png';
-import xiaohongshu from '../../public/images/contact/xiaohongshu.png';
-import xiaohongshu_qr from '../../public/images/contact/xiaohongshu_qr.png';
+
+
+const baseUrl = 'https://static-1314371099.cos.ap-beijing.myqcloud.com/images/contact/'
 
 const data = [
   {
-    wechat: wechat,
-    wechat_qr: wechat_qr,
-    weibo: weibo,
-    weibo_qr: weibo_qr,
-    tiktok: tiktok,
-    tiktok_qr: tiktok_qr,
-    xiaohongshu: xiaohongshu,
-    xiaohongshu_qr: xiaohongshu_qr,
-    bilibili: bilibili,
-    bilibili_qr: bilibili_qr,
-    rectlogo: rectlogo,
+    wechat: `${baseUrl}wechat.png`,
+    wechat_qr: `${baseUrl}wechat_qr.jpg`,
+    weibo: `${baseUrl}weibo.png`,
+    weibo_qr: `${baseUrl}weibo_qr.png`,
+    tiktok: `${baseUrl}tiktok.png`,
+    tiktok_qr: `${baseUrl}tiktok_qr.jpg`,
+    xiaohongshu: `${baseUrl}xiaohongshu.png`,
+    xiaohongshu_qr: `${baseUrl}xiaohongshu_qr.png`,
+    bilibili: `${baseUrl}bilibili.png`,
+    bilibili_qr: `${baseUrl}bilibili_qr.jpg`,
+    rectlogo: `${baseUrl}rectlogo.png`,
   },
 ];
 

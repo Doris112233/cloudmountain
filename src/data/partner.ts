@@ -1,8 +1,7 @@
-import partner from '../../public/images/partner/partner.png';
 
 const data = [
   {
-    src: partner,
+    src: 'https://static-1314371099.cos.ap-beijing.myqcloud.com/images/partner/partner.png',
   },
 ];
 

@@ -1,15 +1,5 @@
-import ht1 from '../../public/images/archive/Hoolock_tianxing_1.jpg';
-import ht2 from '../../public/images/archive/Hoolock_tianxing_2.jpg';
-import hl1 from '../../public/images/archive/Hylobates_lar_1.jpg';
-import hl2 from '../../public/images/archive/Hylobates_lar_2.jpg';
-import nc1 from '../../public/images/archive/Nomascus_concolor_1.jpg';
-import nc2 from '../../public/images/archive/Nomascus_concolor_2.jpg';
-import nh1 from '../../public/images/archive/Nomascus_hainanus_1.jpg';
-import nh2 from '../../public/images/archive/Nomascus_hainanus_2.jpg';
-import nl1 from '../../public/images/archive/Nomascus_leucogenys_1.jpg';
-import nl2 from '../../public/images/archive/Nomascus_leucogenys_2.jpg';
-import nn1 from '../../public/images/archive/Nomascus_nasutus_1.jpg';
-import nn2 from '../../public/images/archive/Nomascus_nasutus_2.jpg';
+
+const baseUrl = 'https://static-1314371099.cos.ap-beijing.myqcloud.com/images/archive/';
 
 const dataArchaeo = [
   {
@@ -30,7 +20,7 @@ const dataArchaeo = [
     amount: 'archive.gibbon1.amount',
     feature: 'archive.gibbon1.feature',
     imageCount: 2,
-    images: [ht1, ht2],
+    images: [`${baseUrl}Hoolock_tianxing_1.jpg`, `${baseUrl}Hoolock_tianxing_2.jpg`],
   },
   {
     key: 1,
@@ -50,7 +40,7 @@ const dataArchaeo = [
     amount: 'archive.gibbon2.amount',
     feature: 'archive.gibbon2.feature',
     imageCount: 2,
-    images: [nh1, nh2],
+    images: [`${baseUrl}Nomascus_hainanus_1.jpg`, `${baseUrl}Nomascus_hainanus_2.jpg`],
   },
   {
     key: 2,
@@ -70,7 +60,7 @@ const dataArchaeo = [
     amount: 'archive.gibbon3.amount',
     feature: 'archive.gibbon3.feature',
     imageCount: 2,
-    images: [nn1, nn2],
+    images: [`${baseUrl}Nomascus_nasutus_1.jpg`, `${baseUrl}Nomascus_nasutus_2.jpg`],
   },
   {
     key: 3,
@@ -90,7 +80,7 @@ const dataArchaeo = [
     amount: 'archive.gibbon4.amount',
     feature: 'archive.gibbon4.feature',
     imageCount: 2,
-    images: [nc1, nc2],
+    images: [`${baseUrl}Nomascus_concolor_1.jpg`, `${baseUrl}Nomascus_concolor_2.jpg`],
   },
   {
     key: 4,
@@ -110,7 +100,7 @@ const dataArchaeo = [
     amount: 'archive.gibbon5.amount',
     feature: 'archive.gibbon5.feature',
     imageCount: 2,
-    images: [nl1, nl2],
+    images: [`${baseUrl}Nomascus_leucogenys_1.jpg`, `${baseUrl}Nomascus_leucogenys_2.jpg`],
   },
   {
     key: 5,
@@ -130,7 +120,7 @@ const dataArchaeo = [
     amount: 'archive.gibbon6.amount',
     feature: 'archive.gibbon6.feature',
     imageCount: 2,
-    images: [hl1, hl2],
+    images: [`${baseUrl}Hylobates_lar_1.jpg`, `${baseUrl}Hylobates_lar_2.jpg`],
   },
 ];
 export default dataArchaeo;

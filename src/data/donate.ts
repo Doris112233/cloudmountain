@@ -1,12 +1,12 @@
-import month1 from '../../public/images/donate/month.jpg';
-import month2 from '../../public/images/donate/month2.png';
+
+
 
 const data = [
   {
-    src: month1,
+    src: 'https://static-1314371099.cos.ap-beijing.myqcloud.com/images/donate/month.jpg',
   },
   {
-    src: month2,
+    src: 'https://static-1314371099.cos.ap-beijing.myqcloud.com/images/donate/month2.png',
   },
 ];
 

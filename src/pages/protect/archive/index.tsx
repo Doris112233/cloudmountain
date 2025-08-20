@@ -13,20 +13,20 @@ import { Spin } from 'antd';
 
 // const hoAu = require('./audio/Hoolock_tianxing.mp3');
 
-import tianxing from '../../../../public/audio/archive/Hoolock_tianxing.mp3';
-import lar from '../../../../public/audio/archive/Hylobates_lar.mp3';
-import concolor from '../../../../public/audio/archive/Nomascus_concolor.mp3';
-import hainanus from '../../../../public/audio/archive/Nomascus_hainanus.mp3';
-import leucogenys from '../../../../public/audio/archive/Nomascus_leucogenys.mp3';
-import nasutus from '../../../../public/audio/archive/Nomascus_nasutus.mp3';
+// import tianxing from '../../../../public/audio/archive/Hoolock_tianxing.mp3';
+// import lar from '../../../../public/audio/archive/Hylobates_lar.mp3';
+// import concolor from '../../../../public/audio/archive/Nomascus_concolor.mp3';
+// import hainanus from '../../../../public/audio/archive/Nomascus_hainanus.mp3';
+// import leucogenys from '../../../../public/audio/archive/Nomascus_leucogenys.mp3';
+// import nasutus from '../../../../public/audio/archive/Nomascus_nasutus.mp3';
 
 const audios = [
-  new Audio(tianxing),
-  new Audio(hainanus),
-  new Audio(nasutus),
-  new Audio(concolor),
-  new Audio(leucogenys),
-  new Audio(lar),
+  new Audio('https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Hoolock_tianxing.mp3'),
+  new Audio('https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Hylobates_lar.mp3'),
+  new Audio('https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Nomascus_concolor.mp3'),
+  new Audio('https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Nomascus_hainanus.mp3'),
+  new Audio('https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Nomascus_leucogenys.mp3'),
+  new Audio('https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Nomascus_nasutus.mp3'),
 ];
 
 const ImgViewer = (props: { src: string }) => {

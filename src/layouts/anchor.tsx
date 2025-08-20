@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import anime from 'animejs/lib/anime.es.js';
 import { Tooltip } from 'antd';
-import gibbon from '../../public/images/anchor/gibbon.png';
-import tree from '../../public/images/anchor/tree.png';
+// import gibbon from '../../public/images/anchor/gibbon.png';
+// import tree from '../../public/images/anchor/tree.png';
 import './anchor.less';
 
 const BasicAnchor: React.FC = () => {
@@ -53,11 +53,11 @@ const BasicAnchor: React.FC = () => {
             zIndex: 5,
           }}
         >
-          <img style={styles.tree} src={tree} alt="tree" />
+          <img style={styles.tree} src={'https://static-1314371099.cos.ap-beijing.myqcloud.com/images/anchor/tree.png'} alt="tree" />
           <img
             ref={gibbonRef}
             style={styles.gibbon}
-            src={gibbon}
+            src={'https://static-1314371099.cos.ap-beijing.myqcloud.com/images/anchor/gibbon.png'}
             alt="gibbon"
           />
         </div>

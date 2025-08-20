@@ -1,17 +1,13 @@
-import pi1 from '../../public/images/programs/pi1.png';
-import pi2 from '../../public/images/programs/pi2.png';
-import pc from '../../public/images/programs/pc.png';
-import pp from '../../public/images/programs/pp.png';
 
 const data = {
   pi2: {
-    src: pi2,
+    src: 'https://static-1314371099.cos.ap-beijing.myqcloud.com/images/programs/pi2.png',
   },
   pc: {
-    src: pc,
+    src: 'https://static-1314371099.cos.ap-beijing.myqcloud.com/images/programs/pc.png',
   },
   pp: {
-    src: pp,
+    src: 'https://static-1314371099.cos.ap-beijing.myqcloud.com/images/programs/pp.png',
   },
 };
 

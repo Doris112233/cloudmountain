@@ -1,15 +1,12 @@
-import k1 from '../../public/images/knowledge/k1.png';
-import k2 from '../../public/images/knowledge/k2.png';
-import k3 from '../../public/images/knowledge/k3.png';
-import k4 from '../../public/images/knowledge/k4.jpg';
-import k5 from '../../public/images/knowledge/k5.jpg';
 
+
+const baseUrl = 'https://static-1314371099.cos.ap-beijing.myqcloud.com/images/knowledge/'
 const data = {
-  k1: k1,
-  k2: k2,
-  k3: k3,
-  k4: k4,
-  k5: k5,
+  k1: `${baseUrl}k1.png`,
+  k2: `${baseUrl}k2.png`,
+  k3: `${baseUrl}k3.png`,
+  k4: `${baseUrl}k4.jpg`,
+  k5: `${baseUrl}k5.jpg`,
 };
 
 export default data;
