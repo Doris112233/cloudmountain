@@ -1,5 +1,4 @@
 
-
 const baseUrl = 'https://static-1314371099.cos.ap-beijing.myqcloud.com/reports/';
 const data = [
   {
