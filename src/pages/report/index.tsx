@@ -6,6 +6,7 @@ import { useMediaQuery, useTheme } from '@mui/material';
 import type { SliderMarks } from 'antd/es/slider';
 import './index.less';
 import data from '../../data/report';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 interface ReportProps {
   initCurr: number;
@@ -18,6 +19,8 @@ const Report: React.FC<ReportProps> = (props) => {
 
   const [curr, setCurr] = useState<number>(props.initCurr ? props.initCurr : 0);
   const [picModal, setPicModal] = useState<boolean>(false);
+  const [imageLoading, setImageLoading] = useState<boolean>(true);
+  const [loadingStartTime, setLoadingStartTime] = useState<number>(Date.now());
 
   const passedStyle = {
     color: '#8da745',
@@ -43,6 +46,27 @@ const Report: React.FC<ReportProps> = (props) => {
     };
   });
 
+  const handleImageLoad = () => {
+    const loadingDuration = Date.now() - loadingStartTime;
+    const minLoadingTime = 300;
+    
+    if (loadingDuration < minLoadingTime) {
+      setTimeout(() => setImageLoading(false), minLoadingTime - loadingDuration);
+    } else {
+      setImageLoading(false);
+    }
+  };
+
+  const handleImageError = () => {
+    setImageLoading(false);
+  };
+
+  const handleSliderChange = (value: number) => {
+    setCurr(value);
+    setImageLoading(true); // Reset loading state when changing reports
+    setLoadingStartTime(Date.now()); // Record when loading started
+  };
+
   const renderPictureModal = () => {
     return (
       <Modal
@@ -62,7 +86,12 @@ const Report: React.FC<ReportProps> = (props) => {
       return (
         <a href={data[curr].href} target="_blank">
           <div className="report-card">
-            <img style={{ width: '45vh' }} src={data[curr].src}></img>
+            <img 
+              style={{ width: '45vh' }} 
+              src={data[curr].src}
+              onLoad={handleImageLoad}
+              onError={handleImageError}
+            ></img>
           </div>
         </a>
       );
@@ -70,7 +99,12 @@ const Report: React.FC<ReportProps> = (props) => {
       return (
         <div onClick={() => setPicModal(true)}>
           <div className="report-card">
-            <img className="report-pic" src={data[curr].src}></img>
+            <img 
+              className="report-pic" 
+              src={data[curr].src}
+              onLoad={handleImageLoad}
+              onError={handleImageError}
+            ></img>
           </div>
         </div>
       );
@@ -97,7 +131,7 @@ const Report: React.FC<ReportProps> = (props) => {
                 marks={masksBig}
                 defaultValue={curr}
                 vertical
-                onChange={(v: any) => setCurr(v)}
+                onChange={handleSliderChange}
                 reverse
                 step={1}
                 min={0}
@@ -113,7 +147,7 @@ const Report: React.FC<ReportProps> = (props) => {
                 marks={masksSmall}
                 defaultValue={curr}
                 vertical
-                onChange={(v: any) => setCurr(v)}
+                onChange={handleSliderChange}
                 reverse
                 step={1}
                 min={0}
@@ -132,12 +166,13 @@ const Report: React.FC<ReportProps> = (props) => {
           justifyContent="flex-start"
           alignItems="center"
         >
-          <Grid item xs={12} style={{ margin: 'auto' }}>
+          <Grid item xs={12} style={{ margin: 'auto', position: 'relative' }}>
+            <LoadingSpinner visible={imageLoading} size="large" tip="加载中..." />
             {renderPic()}
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <div className="report-tip">{'点击封面阅读'}</div>
-          </Grid>
+          </Grid> */}
           <Grid item>
             {data[curr].href && data[curr].down && (
               <Button
