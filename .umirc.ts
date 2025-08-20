@@ -6,7 +6,7 @@ export default defineConfig({
     type: 'none',
   },
   theme: {
-    '@primary-color': '#8da745',
+    '@primary-color': '#8BC34B',
   },
   antd: {
     // compact: true,

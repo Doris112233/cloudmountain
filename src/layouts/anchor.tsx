@@ -49,7 +49,7 @@ const BasicAnchor: React.FC = () => {
             position: 'fixed',
             bottom: '100px',
             width: '7vh',
-            marginLeft: '-24px',
+            // marginLeft: '-24px',
             zIndex: 5,
           }}
         >
