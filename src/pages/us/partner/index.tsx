@@ -1,46 +1,31 @@
-import React from 'react';
-import { useIntl } from 'umi';
-import Grid from '@mui/material/Grid';
-import data from '../../../data/partner';
-import './index.less';
-import Divider from '@mui/material/Divider';
+import React from "react";
+import { useIntl, getLocale } from "umi";
+import Grid from "@mui/material/Grid";
+import data from "../../../data/partner";
+import "./index.less";
+import Divider from "@mui/material/Divider";
 
 const Partner: React.FC = (props) => {
   const intl = useIntl();
+  const currentLocale = getLocale();
+  const isChinese = currentLocale === "zh-CN";
+  const isEnglish = !isChinese;
 
-  const src = data[0].src;
-  const partners = [
-    {
-      name: intl.formatMessage({ id: 'us.partner.1.name' }),
-      desc: intl.formatMessage({ id: 'us.partner.1.desc' }),
-      link: intl.formatMessage({ id: 'us.partner.1.link' }),
-    },
-    {
-      name: intl.formatMessage({ id: 'us.partner.2.name' }),
-      desc: intl.formatMessage({ id: 'us.partner.2.desc' }),
-      link: intl.formatMessage({ id: 'us.partner.2.link' }),
-    },
-    {
-      name: intl.formatMessage({ id: 'us.partner.3.name' }),
-      desc: intl.formatMessage({ id: 'us.partner.3.desc' }),
-      link: intl.formatMessage({ id: 'us.partner.3.link' }),
-    },
-    {
-      name: intl.formatMessage({ id: 'us.partner.4.name' }),
-      desc: intl.formatMessage({ id: 'us.partner.4.desc' }),
-      link: intl.formatMessage({ id: 'us.partner.4.link' }),
-    },
-    {
-      name: intl.formatMessage({ id: 'us.partner.5.name' }),
-      desc: intl.formatMessage({ id: 'us.partner.5.desc' }),
-      link: intl.formatMessage({ id: 'us.partner.5.link' }),
-    },
-    {
-      name: intl.formatMessage({ id: 'us.partner.6.name' }),
-      desc: intl.formatMessage({ id: 'us.partner.6.desc' }),
-      link: intl.formatMessage({ id: 'us.partner.6.link' }),
-    },
-  ];
+  const partners = [];
+  for (let i = 1; i <= 15; i++) {
+    partners.push({
+      name: intl.formatMessage({ id: `us.partner.${i}` }),
+      type: "partner",
+    });
+  }
+
+  const govPartners = [];
+  for (let i = 1; i <= 18; i++) {
+    govPartners.push({
+      name: intl.formatMessage({ id: `us.govpartner.${i}` }),
+      type: "govpartner",
+    });
+  }
 
   return (
     <Grid
@@ -48,37 +33,67 @@ const Partner: React.FC = (props) => {
       direction="column"
       justifyContent="center"
       alignItems="center"
+      className={`partner-container ${isChinese ? "partner-zh" : "partner-en"}`}
     >
-      <Grid item xs={12} sm={10} md={8}>
-        <h1 className="partner-title">
-          {intl.formatMessage({ id: 'us.partner.title' })}
-        </h1>
-        <p className="partner-desc">
-          {intl.formatMessage({ id: 'us.partner.desc' })}
-        </p>
-        <p className="partner-list">
-          {intl.formatMessage({ id: 'us.partner.list' })}
-        </p>
-      </Grid>
-      <Grid item xs={12} sm={10} md={8}>
-        <Grid container spacing={2}>
-          {partners.map((partner, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <div className="partner-card">
-                <h2>{partner.name}</h2>
-                <p>{partner.desc}</p>
-                <a
-                  href={partner.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {partner.link}
-                </a>
-              </div>
-            </Grid>
-          ))}
+      <div className="col-md-12 partner-title">
+        <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>
+          {intl.formatMessage({ id: "us.partner.title" })}
+        </h2>
+      </div>
+
+      <div className="partner-content">
+        <p>{intl.formatMessage({ id: "us.partner.desc" })}</p>
+        {isEnglish && (
+          <ul>
+            <li>{intl.formatMessage({ id: "us.partner.list.1" })}</li>
+            <li>{intl.formatMessage({ id: "us.partner.list.2" })}</li>
+            <li>{intl.formatMessage({ id: "us.partner.list.3" })}</li>
+            <li>{intl.formatMessage({ id: "us.partner.list.4" })}</li>
+          </ul>
+        )}
+      </div>
+
+      <Divider />
+
+      {isChinese ? (
+        // Chinese version - show image
+        <Grid item xs={12} sm={10} md={8}>
+          <div className="partner-image-container">
+            <img src={data.partner} alt="合作伙伴" className="partner-image" />
+          </div>
         </Grid>
-      </Grid>
+      ) : (
+        // English version - show partner lists
+        <div className="partner-content">
+          <div className="partner-list-section">
+            <h3 className="partner-section-title">
+              {intl.formatMessage({ id: "us.partner.list.1" })}
+            </h3>
+            <div className="partner-names">
+              {partners.map((partner, index) => (
+                <div key={index} className="partner-line">
+                  {partner.name}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <Divider />
+
+          <div className="partner-list-section">
+            <h3 className="partner-section-title">
+              {intl.formatMessage({ id: "us.partner.list.2" })}
+            </h3>
+            <div className="partner-names">
+              {govPartners.map((partner, index) => (
+                <div key={index} className="partner-line">
+                  {partner.name}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </Grid>
   );
 };

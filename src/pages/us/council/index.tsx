@@ -1,9 +1,9 @@
-import React from 'react';
-import { useIntl, setLocale, getLocale } from 'umi';
-import Grid from '@mui/material/Grid';
-import { Divider, Avatar, Tag } from 'antd';
-import './index.less';
-import getCouncilData from '../../../data/council';
+import React from "react";
+import { useIntl, setLocale, getLocale } from "umi";
+import Grid from "@mui/material/Grid";
+import { Divider, Avatar, Tag } from "antd";
+import "./index.less";
+import getCouncilData from "../../../data/council";
 
 const Council: React.FC = (props) => {
   const intl = useIntl();
@@ -41,9 +41,9 @@ const Council: React.FC = (props) => {
             <div className="council-desc">
               {/* {person.desc[0]} */}
               {Array.isArray(person.desc) ? (
-                <ul style={{ margin: 0, paddingLeft: '20px' }}>
+                <ul style={{ margin: 0, paddingLeft: "20px" }}>
                   {person.desc.map((item: string, index: number) => (
-                    <li key={index} style={{ marginBottom: '8px' }}>
+                    <li key={index} style={{ marginBottom: "8px" }}>
                       {item}
                     </li>
                   ))}
@@ -91,11 +91,10 @@ const Council: React.FC = (props) => {
           </Grid>
           <Grid item>
             <div className="council-desc">
-              {person.desc[0]}
               {Array.isArray(person.desc) ? (
-                <ul style={{ margin: 0, paddingLeft: '20px' }}>
+                <ul style={{ margin: 0, paddingLeft: "20px" }}>
                   {person.desc.slice(1).map((item: string, index: number) => (
-                    <li key={index} style={{ marginBottom: '8px' }}>
+                    <li key={index} style={{ marginBottom: "8px" }}>
                       {item}
                     </li>
                   ))}
@@ -119,9 +118,11 @@ const Council: React.FC = (props) => {
         alignItems="center"
         spacing={2}
       >
-        <Grid item>
-          <div className="council-title">
-            {intl.formatMessage({ id: 'about.council.title' })}
+        <Grid item xs={12} style={{ width: "100%" }}>
+          <div className="col-md-12 example-title">
+            <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>
+              {intl.formatMessage({ id: "about.council.title" })}
+            </h2>
           </div>
         </Grid>
         <Grid item xs={12}>
@@ -143,6 +144,7 @@ const Council: React.FC = (props) => {
             {renderPeopleCard(data[2])}
           </Grid>
         </Grid>
+        <Divider />
         <Grid
           item
           xs={12}
@@ -174,6 +176,7 @@ const Council: React.FC = (props) => {
             {renderPeopleCard(data[6])}
           </Grid>
         </Grid>
+        <Divider />
         <Grid
           item
           xs={12}

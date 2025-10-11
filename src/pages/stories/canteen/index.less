@@ -1,0 +1,81 @@
+@import "../../base.less";
+
+.story-container {
+  margin: -24px -24px 0;
+  // padding: 40px 0;
+  min-height: 100vh;
+}
+
+.story-content-container {
+  padding: 20px 0;
+}
+
+.story-header {
+  margin-bottom: 40px;
+}
+
+.story-main-title {
+  color: @primary-color;
+  text-align: center;
+  font-weight: 600;
+
+  @media (max-width: 767px) {
+    font-size: 1em;
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    font-size: 1.2em;
+  }
+
+  @media (min-width: 1025px) {
+    font-size: 1.8em;
+  }
+}
+
+.story-content {
+  padding: 0 20px;
+
+  @media (min-width: 768px) {
+    padding: 0 40px;
+  }
+}
+
+.story-paragraph {
+  font-size: 16px;
+  line-height: 2;
+  color: #333;
+  margin-bottom: 24px;
+  text-align: justify;
+  text-indent: 2em;
+
+  @media (max-width: 767px) {
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    font-size: 16px;
+    line-height: 1.9;
+  }
+
+  @media (min-width: 1025px) {
+    font-size: 17px;
+  }
+}
+
+// Card styling
+:global {
+  .story-container .ant-card {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .story-container .ant-card-body {
+    padding: 40px 20px;
+
+    @media (min-width: 768px) {
+      padding: 60px 40px;
+    }
+  }
+}

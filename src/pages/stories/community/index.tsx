@@ -1,0 +1,59 @@
+import React from "react";
+import { useIntl } from "umi";
+import { Card, Row, Col } from "antd";
+import "./index.less";
+import CustomDivider from "../../../components/customDivider";
+
+const CommunityStory: React.FC = () => {
+  const intl = useIntl();
+
+  return (
+    <div className="story-container">
+      <Card>
+        <Row
+          gutter={[24, 24]}
+          justify="center"
+          className="story-content-container"
+        >
+          <Col xs={24} sm={22} md={20} lg={18}>
+            <div className="story-header">
+              <CustomDivider>
+                <div className="story-main-title">
+                  {intl.formatMessage({ id: "story.community.title" })}
+                </div>
+              </CustomDivider>
+            </div>
+
+            <div className="story-content">
+              <p className="story-paragraph">
+                {intl.formatMessage({ id: "story.community.p1" })}
+              </p>
+
+              <p className="story-paragraph">
+                {intl.formatMessage({ id: "story.community.p2" })}
+              </p>
+
+              <p className="story-paragraph">
+                {intl.formatMessage({ id: "story.community.p3" })}
+              </p>
+
+              <p className="story-paragraph">
+                {intl.formatMessage({ id: "story.community.p4" })}
+              </p>
+
+              <p className="story-paragraph">
+                {intl.formatMessage({ id: "story.community.p5" })}
+              </p>
+
+              <p className="story-paragraph">
+                {intl.formatMessage({ id: "story.community.p6" })}
+              </p>
+            </div>
+          </Col>
+        </Row>
+      </Card>
+    </div>
+  );
+};
+
+export default CommunityStory;

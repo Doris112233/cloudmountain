@@ -1,15 +1,15 @@
-import React from 'react';
-import { useIntl, setLocale } from 'umi';
-import Grid from '@mui/material/Grid';
-import { Card, Divider } from 'antd';
-import './index.less';
-import data from '../../../data/contact';
+import React from "react";
+import { useIntl, setLocale } from "umi";
+import Grid from "@mui/material/Grid";
+import { Card, Divider } from "antd";
+import "./index.less";
+import data from "../../../data/contact";
 import {
   HomeOutlined,
   GlobalOutlined,
   PhoneOutlined,
   MailOutlined,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 
 const Contact: React.FC = (props) => {
   const intl = useIntl();
@@ -54,7 +54,9 @@ const Contact: React.FC = (props) => {
           </Grid>
         </Grid>
         <Divider>
-          <div className="contact-title">联系方式</div>
+          <div className="contact-title">
+            {intl.formatMessage({ id: "us.contact.title" })}
+          </div>
         </Divider>
         <Grid
           item
@@ -68,21 +70,23 @@ const Contact: React.FC = (props) => {
           {renderContactItem(
             <div className="contact-item-title">
               <HomeOutlined className="item-icon" />
-              地址:
+              {intl.formatMessage({ id: "us.contact.address" })}:
             </div>,
-            <div>云南省大理古城苍坪街56号床单厂艺术区C-2-2</div>,
+            <div>
+              {intl.formatMessage({ id: "us.contact.address.content" })}
+            </div>,
           )}
           {renderContactItem(
             <div className="contact-item-title">
               <PhoneOutlined className="item-icon" />
-              电话:
+              {intl.formatMessage({ id: "us.contact.tel" })}:
             </div>,
             <div>0872-2504186</div>,
           )}
           {renderContactItem(
             <div className="contact-item-title">
               <GlobalOutlined className="item-icon" />
-              网站:
+              {intl.formatMessage({ id: "us.contact.site" })}:
             </div>,
             <a href="https://www.cloudmountain.cn" target="_blank">
               www.cloudmountain.cn
@@ -91,7 +95,7 @@ const Contact: React.FC = (props) => {
           {renderContactItem(
             <div className="contact-item-title">
               <MailOutlined className="item-icon" />
-              邮件:
+              {intl.formatMessage({ id: "us.contact.email" })}:
             </div>,
             <a href="mailto:info@cloudmountain.cn">info@cloudmountain.cn</a>,
           )}
@@ -104,7 +108,9 @@ const Contact: React.FC = (props) => {
     return (
       <>
         <Divider>
-          <div className="contact-title">关注我们</div>
+          <div className="contact-title">
+            {intl.formatMessage({ id: "us.contact.follow" })}
+          </div>
         </Divider>
         <Grid
           item

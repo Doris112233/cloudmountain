@@ -1,6 +1,5 @@
-
-
-const baseUrl = 'https://static-1314371099.cos.ap-beijing.myqcloud.com/images/index/'
+const baseUrl =
+  "https://static-1314371099.cos.ap-beijing.myqcloud.com/images/index/";
 
 const data = {
   headpic: `${baseUrl}headpic.png`,
@@ -17,7 +16,7 @@ const data = {
   s2: `${baseUrl}s2.png`,
   s3: `${baseUrl}s3.png`,
   s4: `${baseUrl}s4.png`,
-  map: `${baseUrl}map.png`,
+  map: `${baseUrl}map.jpg`,
   ellipse1: `${baseUrl}ellipse1.png`,
   ellipse2: `${baseUrl}ellipse2.png`,
   ellipse3: `${baseUrl}ellipse3.png`,

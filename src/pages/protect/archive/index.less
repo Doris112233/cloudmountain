@@ -132,3 +132,50 @@
   display: flex;
   align-items: center;
 }
+
+.tabs-container {
+  width: 60%;
+  max-width: 100%;
+  margin: 0 auto 10px auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  display: flex-start;
+  justify-content: center;
+
+  &::-webkit-scrollbar {
+    height: 4px;
+    margin-bottom: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: @primary-color;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #7a923d;
+  }
+
+  :global {
+    .ant-tabs {
+      overflow: visible;
+      width: 100%;
+    }
+    .ant-tabs-nav {
+      margin: 0 auto;
+    }
+    .ant-tabs-nav-wrap {
+      overflow: visible !important;
+    }
+    .ant-tabs-nav-list {
+      flex-wrap: nowrap !important;
+      white-space: nowrap;
+    }
+    .ant-tabs-tab {
+      flex-shrink: 0;
+    }
+  }
+}

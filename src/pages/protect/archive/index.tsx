@@ -1,47 +1,72 @@
-import React, { useState } from 'react';
-import { useIntl } from 'umi';
-import { Button, Tabs, Card, Descriptions, Typography } from 'antd';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import data from '../../../data/archive';
-import dataArchaeo from '../../../data/archaeo';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper.less';
-import './index.less';
-import { SoundOutlined, PauseOutlined } from '@ant-design/icons';
-import { Spin } from 'antd';
-
-// const hoAu = require('./audio/Hoolock_tianxing.mp3');
-
-// import tianxing from '../../../../public/audio/archive/Hoolock_tianxing.mp3';
-// import lar from '../../../../public/audio/archive/Hylobates_lar.mp3';
-// import concolor from '../../../../public/audio/archive/Nomascus_concolor.mp3';
-// import hainanus from '../../../../public/audio/archive/Nomascus_hainanus.mp3';
-// import leucogenys from '../../../../public/audio/archive/Nomascus_leucogenys.mp3';
-// import nasutus from '../../../../public/audio/archive/Nomascus_nasutus.mp3';
+import React, { useState } from "react";
+import { useIntl } from "umi";
+import { Button, Tabs, Card, Descriptions, Typography } from "antd";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import data from "../../../data/archive";
+import dataArchaeo from "../../../data/archaeo";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper.less";
+import "./index.less";
+import { SoundOutlined, PauseOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 const audios = [
-  new Audio('https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Hoolock_tianxing.mp3'),
-  new Audio('https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Hylobates_lar.mp3'),
-  new Audio('https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Nomascus_concolor.mp3'),
-  new Audio('https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Nomascus_hainanus.mp3'),
-  new Audio('https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Nomascus_leucogenys.mp3'),
-  new Audio('https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Nomascus_nasutus.mp3'),
+  new Audio(
+    "https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Hoolock_tianxing.mp3",
+  ),
+  new Audio(
+    "https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Nomascus_hainanus.mp3",
+  ),
+  new Audio(
+    "https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Nomascus_nasutus.mp3",
+  ),
+  new Audio(
+    "https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Nomascus_concolor.mp3",
+  ),
+  new Audio(
+    "https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Nomascus_leucogenys.mp3",
+  ),
+  new Audio(
+    "https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Hylobates_lar.mp3",
+  ),
+  new Audio(
+    "https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Hoolock_hoolock.mp3",
+  ),
 ];
 
-const ImgViewer = (props: { src: string }) => {
+const ImgViewer = (props: { src: string; intl: any }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   return (
-    <div>
-      <div style={{ display: isLoading ? 'none' : 'block' }}>
+    <div
+      style={{
+        position: "relative",
+        minHeight: "30rem",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <div style={{ display: isLoading ? "none" : "block" }}>
         <img
           onLoad={() => setIsLoading(false)}
-          style={{ height: '30rem' }}
+          style={{ height: "30rem" }}
           src={props.src}
         />
       </div>
-      <div style={{ display: isLoading ? 'block' : 'none' }}>
-        <Spin />
+      <div
+        style={{
+          display: isLoading ? "flex" : "none",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "30rem",
+          width: "100%",
+        }}
+      >
+        <Spin
+          size="large"
+          tip={props.intl.formatMessage({ id: "loading.tip" })}
+        />
       </div>
     </div>
   );
@@ -57,7 +82,7 @@ export default (props: { location: { query: { id: string } } }) => {
   const { Text, Title } = Typography;
 
   const descItemStyle = {
-    color: '#8da745',
+    color: "#8da745",
   };
 
   const changeTab = (key: string) => {
@@ -80,22 +105,22 @@ export default (props: { location: { query: { id: string } } }) => {
       <section className="section-archeology">
         <div className="section-archeology-container"></div>
         <div className="section-archeology-header">
-          <h1>{intl.formatMessage({ id: 'protect.inChina.title' })}</h1>
+          <h1>{intl.formatMessage({ id: "protect.inChina.title" })}</h1>
         </div>
         <div className="section-archeology-content">
           <div className="text-section">
-            <p>{intl.formatMessage({ id: 'protect.inChina.content.1' })}</p>
-            <p>{intl.formatMessage({ id: 'protect.inChina.content.2' })}</p>
+            <p>{intl.formatMessage({ id: "protect.inChina.content.1" })}</p>
+            <p>{intl.formatMessage({ id: "protect.inChina.content.2" })}</p>
             <div className="image-row">
               <img
                 src={dataArchaeo.archaeo1}
-                alt={intl.formatMessage({ id: 'protect.inChina.content.3' })}
+                alt={intl.formatMessage({ id: "protect.inChina.content.3" })}
               />
               <div className="side-text">
-                <p>{intl.formatMessage({ id: 'protect.inChina.content.4' })}</p>
+                <p>{intl.formatMessage({ id: "protect.inChina.content.4" })}</p>
               </div>
             </div>
-            <p>{intl.formatMessage({ id: 'protect.inChina.content.5' })}</p>
+            <p>{intl.formatMessage({ id: "protect.inChina.content.5" })}</p>
           </div>
           <div className="vertical-image">
             <img src={dataArchaeo.archaeo2} alt="青铜长臂猿" />
@@ -126,23 +151,36 @@ export default (props: { location: { query: { id: string } } }) => {
                 onClick={playAudio}
                 icon={isPlaying ? <PauseOutlined /> : <SoundOutlined />}
               >
-                {intl.formatMessage({ id: 'protect.archive.listen' })}
+                {intl.formatMessage({ id: "protect.archive.listen" })}
               </Button>
             </Grid>
-            <Grid item xs={10} sm={9} md={9}>
-              <Tabs
-                defaultActiveKey="0"
-                onChange={changeTab}
-                activeKey={selected.toString()}
-                style={{ marginTop: 30 }}
-                tabPosition="top"
-                type="card"
-                items={data.map((item) => ({
-                  key: item.key.toString(),
-                  label: intl.formatMessage({ id: item.name }),
-                  children: null,
-                }))}
-              />
+            <Grid
+              item
+              xs={10}
+              sm={9}
+              md={9}
+              style={{ minWidth: 0, width: "100%" }}
+            >
+              <div className="tabs-container">
+                <Tabs
+                  defaultActiveKey="0"
+                  onChange={changeTab}
+                  activeKey={selected.toString()}
+                  style={{ marginTop: 30 }}
+                  tabPosition="top"
+                  type="card"
+                  renderTabBar={(props, DefaultTabBar) => (
+                    <div style={{ minWidth: "max-content" }}>
+                      <DefaultTabBar {...props} />
+                    </div>
+                  )}
+                  items={data.map((item) => ({
+                    key: item.key.toString(),
+                    label: intl.formatMessage({ id: item.name }),
+                    children: null,
+                  }))}
+                />
+              </div>
             </Grid>
           </Grid>
           <Grid
@@ -161,10 +199,11 @@ export default (props: { location: { query: { id: string } } }) => {
                       <SwiperSlide key={index}>
                         <Container
                           maxWidth="sm"
-                          style={{ textAlign: 'center' }}
+                          style={{ textAlign: "center" }}
                         >
                           <ImgViewer
                             src={data[selected].images[index]}
+                            intl={intl}
                           ></ImgViewer>
                         </Container>
                       </SwiperSlide>
@@ -182,7 +221,7 @@ export default (props: { location: { query: { id: string } } }) => {
                   <Item
                     label={
                       <div style={descItemStyle}>
-                        {intl.formatMessage({ id: 'protect.archive.name' })}
+                        {intl.formatMessage({ id: "protect.archive.name" })}
                       </div>
                     }
                   >
@@ -191,7 +230,7 @@ export default (props: { location: { query: { id: string } } }) => {
                   <Item
                     label={
                       <div style={descItemStyle}>
-                        {intl.formatMessage({ id: 'protect.archive.taxonomy' })}
+                        {intl.formatMessage({ id: "protect.archive.taxonomy" })}
                       </div>
                     }
                   >
@@ -208,24 +247,24 @@ export default (props: { location: { query: { id: string } } }) => {
                   <Item
                     label={
                       <div style={descItemStyle}>
-                        {intl.formatMessage({ id: 'protect.archive.body' })}
+                        {intl.formatMessage({ id: "protect.archive.body" })}
                       </div>
                     }
                   >
                     <p>
-                      {intl.formatMessage({ id: 'protect.archive.weight' })}
+                      {intl.formatMessage({ id: "protect.archive.weight" })}
                       {`${data[selected].body.weight}kg`}
                       &nbsp;
                     </p>
                     <p>
-                      {intl.formatMessage({ id: 'protect.archive.length' })}
+                      {intl.formatMessage({ id: "protect.archive.length" })}
                       {`${data[selected].body.height}cm`}
                     </p>
                   </Item>
                   <Item
                     label={
                       <div style={descItemStyle}>
-                        {intl.formatMessage({ id: 'protect.archive.iucn' })}
+                        {intl.formatMessage({ id: "protect.archive.iucn" })}
                       </div>
                     }
                   >
@@ -234,7 +273,7 @@ export default (props: { location: { query: { id: string } } }) => {
                   <Item
                     label={
                       <div style={descItemStyle}>
-                        {intl.formatMessage({ id: 'protect.archive.status' })}
+                        {intl.formatMessage({ id: "protect.archive.status" })}
                       </div>
                     }
                   >
@@ -243,7 +282,7 @@ export default (props: { location: { query: { id: string } } }) => {
                   <Item
                     label={
                       <div style={descItemStyle}>
-                        {intl.formatMessage({ id: 'protect.archive.range' })}
+                        {intl.formatMessage({ id: "protect.archive.range" })}
                       </div>
                     }
                   >
@@ -252,7 +291,7 @@ export default (props: { location: { query: { id: string } } }) => {
                   <Item
                     label={
                       <div style={descItemStyle}>
-                        {intl.formatMessage({ id: 'protect.archive.number' })}
+                        {intl.formatMessage({ id: "protect.archive.number" })}
                       </div>
                     }
                   >
@@ -261,7 +300,7 @@ export default (props: { location: { query: { id: string } } }) => {
                   <Item
                     label={
                       <div style={descItemStyle}>
-                        {intl.formatMessage({ id: 'protect.archive.feature' })}
+                        {intl.formatMessage({ id: "protect.archive.feature" })}
                       </div>
                     }
                   >
