@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+  ReactNode,
+} from "react";
 
 interface LoadingContextType {
   isLoading: boolean;
@@ -12,7 +19,7 @@ const LoadingContext = createContext<LoadingContextType | undefined>(undefined);
 export const useLoading = () => {
   const context = useContext(LoadingContext);
   if (context === undefined) {
-    throw new Error('useLoading must be used within a LoadingProvider');
+    throw new Error("useLoading must be used within a LoadingProvider");
   }
   return context;
 };
@@ -26,15 +33,13 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const showLoading = () => setIsLoading(true);
-  const hideLoading = () => setIsLoading(false);
+  const showLoading = useCallback(() => setIsLoading(true), []);
+  const hideLoading = useCallback(() => setIsLoading(false), []);
 
-  const value = {
-    isLoading,
-    setIsLoading,
-    showLoading,
-    hideLoading,
-  };
+  const value = useMemo(
+    () => ({ isLoading, setIsLoading, showLoading, hideLoading }),
+    [isLoading, showLoading, hideLoading],
+  );
 
   return (
     <LoadingContext.Provider value={value}>{children}</LoadingContext.Provider>

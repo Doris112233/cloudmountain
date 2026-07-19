@@ -1,39 +1,17 @@
-import React, { useState } from "react";
-import { useIntl } from "umi";
+import React, { useEffect, useRef, useState } from "react";
+import { useIntl, useLocation } from "@umijs/max";
 import { Button, Tabs, Card, Descriptions, Typography } from "antd";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import data from "../../../data/archive";
 import dataArchaeo from "../../../data/archaeo";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper.less";
+import "swiper/css";
 import "./index.less";
 import { SoundOutlined, PauseOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
-
-const audios = [
-  new Audio(
-    "https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Hoolock_tianxing.mp3",
-  ),
-  new Audio(
-    "https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Nomascus_hainanus.mp3",
-  ),
-  new Audio(
-    "https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Nomascus_nasutus.mp3",
-  ),
-  new Audio(
-    "https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Nomascus_concolor.mp3",
-  ),
-  new Audio(
-    "https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Nomascus_leucogenys.mp3",
-  ),
-  new Audio(
-    "https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Hylobates_lar.mp3",
-  ),
-  new Audio(
-    "https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/Hoolock_hoolock.mp3",
-  ),
-];
+import { ArchiveAudioController } from "./audioController";
+import { archiveAudioUrls, normalizeArchiveId } from "./utils";
 
 const ImgViewer = (props: { src: string; intl: any }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -52,6 +30,7 @@ const ImgViewer = (props: { src: string; intl: any }) => {
           onLoad={() => setIsLoading(false)}
           style={{ height: "30rem" }}
           src={props.src}
+          alt=""
         />
       </div>
       <div
@@ -72,32 +51,40 @@ const ImgViewer = (props: { src: string; intl: any }) => {
   );
 };
 
-export default (props: { location: { query: { id: string } } }) => {
-  const queryId = props.location.query.id;
+export default () => {
+  const location = useLocation();
+  const queryId = new URLSearchParams(location.search).get("id");
   const intl = useIntl();
-  const [selected, setSelected] = useState<number>(parseInt(queryId) || 0);
+  const [selected, setSelected] = useState<number>(
+    normalizeArchiveId(queryId, data.length),
+  );
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const audioController = useRef<ArchiveAudioController | null>(null);
+
+  if (!audioController.current) {
+    audioController.current = new ArchiveAudioController(
+      archiveAudioUrls,
+      (src) => new Audio(src),
+      setIsPlaying,
+    );
+  }
+
+  useEffect(() => () => audioController.current?.destroy(), []);
 
   const { Item } = Descriptions;
-  const { Text, Title } = Typography;
+  const { Text } = Typography;
 
   const descItemStyle = {
-    color: "#8da745",
+    color: "#89c24b",
   };
 
   const changeTab = (key: string) => {
-    audios[selected].pause();
-    audios[selected].currentTime = 0;
-    setSelected(parseInt(key));
+    audioController.current?.stop();
+    setSelected(normalizeArchiveId(key, data.length));
   };
 
   const playAudio = () => {
-    if (isPlaying) {
-      audios[selected].pause();
-    } else {
-      audios[selected].play();
-    }
-    setIsPlaying(!isPlaying);
+    void audioController.current?.toggle(selected);
   };
 
   return (
@@ -194,21 +181,13 @@ export default (props: { location: { query: { id: string } } }) => {
             <Grid item xs={12} sm={6} md={5} className="archiveItem">
               <Card>
                 <Swiper>
-                  {[...new Array(data[selected].imageCount)].map(
-                    (item, index) => (
-                      <SwiperSlide key={index}>
-                        <Container
-                          maxWidth="sm"
-                          style={{ textAlign: "center" }}
-                        >
-                          <ImgViewer
-                            src={data[selected].images[index]}
-                            intl={intl}
-                          ></ImgViewer>
-                        </Container>
-                      </SwiperSlide>
-                    ),
-                  )}
+                  {data[selected].images.map((image) => (
+                    <SwiperSlide key={image}>
+                      <Container maxWidth="sm" style={{ textAlign: "center" }}>
+                        <ImgViewer src={image} intl={intl}></ImgViewer>
+                      </Container>
+                    </SwiperSlide>
+                  ))}
                 </Swiper>
               </Card>
             </Grid>

@@ -1,9 +1,9 @@
-import React from 'react';
-import { useIntl, setLocale } from 'umi';
-import Grid from '@mui/material/Grid';
-import { Divider } from 'antd';
-import './index.less';
-const Tianxing: React.FC = (props) => {
+import React from "react";
+import { useIntl } from "@umijs/max";
+import Grid from "@mui/material/Grid";
+import { Divider } from "antd";
+import "./index.less";
+const Tianxing: React.FC = () => {
   const intl = useIntl();
 
   return (
@@ -17,56 +17,56 @@ const Tianxing: React.FC = (props) => {
       <Grid item container xs={12} sm={10} md={8} alignItems="flex-start">
         <Divider>
           <div className="tianxing-title">
-            {intl.formatMessage({ id: 'about.mission' })}
+            {intl.formatMessage({ id: "about.mission" })}
           </div>
         </Divider>
       </Grid>
       <Grid item xs={12} sm={10} md={8}>
-        {intl.formatMessage({ id: 'about.mission.1' })}
+        {intl.formatMessage({ id: "about.mission.1" })}
       </Grid>
 
       <Grid item container xs={12} sm={10} md={8} alignItems="flex-start">
         <Divider>
           <div className="tianxing-title">
-            {intl.formatMessage({ id: 'about.vision' })}
+            {intl.formatMessage({ id: "about.vision" })}
           </div>
         </Divider>
       </Grid>
       <Grid item xs={12} sm={10} md={8}>
-        {intl.formatMessage({ id: 'about.vision.1' })}
+        {intl.formatMessage({ id: "about.vision.1" })}
       </Grid>
 
       <Grid item container xs={12} sm={10} md={8} alignItems="flex-start">
         <Divider>
           <div className="tianxing-title">
-            {intl.formatMessage({ id: 'about.value' })}
+            {intl.formatMessage({ id: "about.value" })}
           </div>
         </Divider>
       </Grid>
       <Grid item xs={12} sm={10} md={8}>
-        {intl.formatMessage({ id: 'about.value.1' })}
+        {intl.formatMessage({ id: "about.value.1" })}
       </Grid>
 
       <Grid item container xs={12} sm={10} md={8} alignItems="flex-start">
         <Divider>
           <div className="tianxing-title">
-            {intl.formatMessage({ id: 'about.slogan' })}
+            {intl.formatMessage({ id: "about.slogan" })}
           </div>
         </Divider>
       </Grid>
       <Grid item xs={12} sm={10} md={8}>
-        {intl.formatMessage({ id: 'about.slogan.1' })}
+        {intl.formatMessage({ id: "about.slogan.1" })}
       </Grid>
 
       <Grid item container xs={12} sm={10} md={8} alignItems="flex-start">
         <Divider>
           <div className="tianxing-title">
-            {intl.formatMessage({ id: 'about.focusing' })}
+            {intl.formatMessage({ id: "about.focusing" })}
           </div>
         </Divider>
       </Grid>
       <Grid item xs={12} sm={10} md={8}>
-        {intl.formatMessage({ id: 'about.focusing.1' })}
+        {intl.formatMessage({ id: "about.focusing.1" })}
       </Grid>
     </Grid>
   );

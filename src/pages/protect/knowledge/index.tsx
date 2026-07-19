@@ -3,7 +3,7 @@ import './index.less';
 
 // Figma asset URLs (replace with local assets if available)
 import data from '../../../data/knowledge';
-import { useIntl } from 'umi';
+import { useIntl } from '@umijs/max';
 
 const KnowledgePage = () => {
   const intl = useIntl();

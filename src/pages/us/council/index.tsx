@@ -1,11 +1,11 @@
 import React from "react";
-import { useIntl, setLocale, getLocale } from "umi";
+import { getLocale, useIntl } from "@umijs/max";
 import Grid from "@mui/material/Grid";
 import { Divider, Avatar, Tag } from "antd";
 import "./index.less";
 import getCouncilData from "../../../data/council";
 
-const Council: React.FC = (props) => {
+const Council: React.FC = () => {
   const intl = useIntl();
   const currentLocale = getLocale();
   const data = getCouncilData(currentLocale);
@@ -33,8 +33,8 @@ const Council: React.FC = (props) => {
             </Grid>
           </Grid>
           <Grid item xs={12}>
-            {person.title.map((item: any) => {
-              return <Tag color="#F5C16D">{item}</Tag>;
+            {person.title.map((item: string) => {
+              return <Tag key={item} color="#F5C16D">{item}</Tag>;
             })}
           </Grid>
           <Grid item xs={12}>
@@ -85,8 +85,8 @@ const Council: React.FC = (props) => {
             </div>
           </Grid>
           <Grid item>
-            {person.title.map((item: any) => {
-              return <Tag color="#F5C16D">{item}</Tag>;
+            {person.title.map((item: string) => {
+              return <Tag key={item} color="#F5C16D">{item}</Tag>;
             })}
           </Grid>
           <Grid item>

@@ -1,21 +1,23 @@
-import { useEffect } from 'react';
-import { useLoading } from './LoadingContext';
-import { history } from 'umi';
+import { useEffect } from "react";
+import { useLoading } from "./LoadingContext";
+import { history } from "@umijs/max";
 
 export const useNavigationLoading = () => {
   const { showLoading, hideLoading } = useLoading();
 
   useEffect(() => {
+    let hideTimer: ReturnType<typeof setTimeout> | undefined;
     const unlisten = history.listen(() => {
       showLoading();
 
-      // Hide loading after a short delay to ensure content is loaded
-      setTimeout(() => {
+      if (hideTimer) clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => {
         hideLoading();
       }, 500);
     });
 
     return () => {
+      if (hideTimer) clearTimeout(hideTimer);
       unlisten();
     };
   }, [showLoading, hideLoading]);

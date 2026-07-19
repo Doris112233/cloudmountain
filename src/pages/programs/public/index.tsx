@@ -1,23 +1,23 @@
-import React, { useEffect } from 'react';
-import { useIntl, setLocale } from 'umi';
-import { Card, Divider, Row, Col } from 'antd';
-import './index.less';
-import data from '../../../data/headpics';
-import CustomDivider from '@/components/customDivider';
+import React from "react";
+import { useIntl } from "@umijs/max";
+import { Card, Row, Col } from "antd";
+import "./index.less";
+import data from "../../../data/headpics";
+import CustomDivider from "@/components/customDivider";
 
-const Public: React.FC = props => {
+const Public: React.FC = () => {
   const intl = useIntl();
 
   return (
-    <div className="article-container">
-      <div className="image-container">
+    <div className="article-container program-page">
+      <div className="program-hero">
         <img
-          className="title-img"
-          src={data['pp'].src}
+          className="program-hero-image"
+          src={data["pp"].src}
           alt="Image Title Loading"
         ></img>
-        <div className="title-overlay">
-          {intl.formatMessage({ id: 'programs.public' })}
+        <div className="program-hero-title">
+          {intl.formatMessage({ id: "programs.public" })}
         </div>
       </div>
       <Card>
@@ -30,65 +30,65 @@ const Public: React.FC = props => {
             <div className="reason-section">
               <CustomDivider>
                 <div className="tianxing-title">
-                  {intl.formatMessage({ id: 'programs.intro' })}
+                  {intl.formatMessage({ id: "programs.intro" })}
                 </div>
               </CustomDivider>
               <div className="card-content">
-                {intl.formatMessage({ id: 'programs.public.intro.1' })}
+                {intl.formatMessage({ id: "programs.public.intro.1" })}
                 <br />
                 <br />
-                {intl.formatMessage({ id: 'programs.public.intro.2' })}
+                {intl.formatMessage({ id: "programs.public.intro.2" })}
                 <br />
                 <br />
-                {intl.formatMessage({ id: 'programs.public.intro.3' })}
+                {intl.formatMessage({ id: "programs.public.intro.3" })}
                 <br />
                 <br />
-                {intl.formatMessage({ id: 'programs.public.intro.4' })}
+                {intl.formatMessage({ id: "programs.public.intro.4" })}
               </div>
             </div>
             <Card className="project-card">
               <CustomDivider>
                 <div className="tianxing-sub-title">
-                  {intl.formatMessage({ id: 'programs.public.title.1' })}
+                  {intl.formatMessage({ id: "programs.public.title.1" })}
                 </div>
               </CustomDivider>
               <div className="card-content">
                 <div className="section-item">
                   <div className="section-title">
-                    {intl.formatMessage({ id: 'programs.time' })}
+                    {intl.formatMessage({ id: "programs.time" })}
                   </div>
                   <div className="section-content">
-                    {intl.formatMessage({ id: 'programs.public.time.1' })}
+                    {intl.formatMessage({ id: "programs.public.time.1" })}
                   </div>
                 </div>
                 <div className="section-item">
                   <div className="section-title">
-                    {intl.formatMessage({ id: 'programs.activities' })}
+                    {intl.formatMessage({ id: "programs.activities" })}
                   </div>
                   <div className="section-content">
                     {intl.formatMessage({
-                      id: 'programs.public.activities.1.1',
+                      id: "programs.public.activities.1.1",
                     })}
                     <br />
                     {intl.formatMessage({
-                      id: 'programs.public.activities.1.2',
+                      id: "programs.public.activities.1.2",
                     })}
                     <br />
                     {intl.formatMessage({
-                      id: 'programs.public.activities.1.3',
+                      id: "programs.public.activities.1.3",
                     })}
                   </div>
                 </div>
                 <div className="section-item">
                   <div className="section-title">
-                    {intl.formatMessage({ id: 'programs.outcome' })}
+                    {intl.formatMessage({ id: "programs.outcome" })}
                   </div>
                   <div className="section-content">
-                    {intl.formatMessage({ id: 'programs.public.outcome.1.1' })}
+                    {intl.formatMessage({ id: "programs.public.outcome.1.1" })}
                     <br />
-                    {intl.formatMessage({ id: 'programs.public.outcome.1.2' })}
+                    {intl.formatMessage({ id: "programs.public.outcome.1.2" })}
                     <br />
-                    {intl.formatMessage({ id: 'programs.public.outcome.1.3' })}
+                    {intl.formatMessage({ id: "programs.public.outcome.1.3" })}
                   </div>
                 </div>
               </div>
@@ -97,46 +97,46 @@ const Public: React.FC = props => {
             <Card className="project-card">
               <CustomDivider>
                 <div className="tianxing-sub-title">
-                  {intl.formatMessage({ id: 'programs.public.title.2' })}
+                  {intl.formatMessage({ id: "programs.public.title.2" })}
                 </div>
               </CustomDivider>
               <div className="card-content">
                 <div className="section-item">
                   <div className="section-title">
-                    {intl.formatMessage({ id: 'programs.time' })}
+                    {intl.formatMessage({ id: "programs.time" })}
                   </div>
                   <div className="section-content">
-                    {intl.formatMessage({ id: 'programs.public.time.2' })}
+                    {intl.formatMessage({ id: "programs.public.time.2" })}
                   </div>
                 </div>
                 <div className="section-item">
                   <div className="section-title">
-                    {intl.formatMessage({ id: 'programs.activities' })}
+                    {intl.formatMessage({ id: "programs.activities" })}
                   </div>
                   <div className="section-content">
                     {intl.formatMessage({
-                      id: 'programs.public.activities.2.1',
+                      id: "programs.public.activities.2.1",
                     })}
                     <br />
                     {intl.formatMessage({
-                      id: 'programs.public.activities.2.2',
+                      id: "programs.public.activities.2.2",
                     })}
                     <br />
                     {intl.formatMessage({
-                      id: 'programs.public.activities.2.3',
+                      id: "programs.public.activities.2.3",
                     })}
                   </div>
                 </div>
                 <div className="section-item">
                   <div className="section-title">
-                    {intl.formatMessage({ id: 'programs.outcome' })}
+                    {intl.formatMessage({ id: "programs.outcome" })}
                   </div>
                   <div className="section-content">
-                    {intl.formatMessage({ id: 'programs.public.outcome.2.1' })}
+                    {intl.formatMessage({ id: "programs.public.outcome.2.1" })}
                     <br />
-                    {intl.formatMessage({ id: 'programs.public.outcome.2.2' })}
+                    {intl.formatMessage({ id: "programs.public.outcome.2.2" })}
                     <br />
-                    {intl.formatMessage({ id: 'programs.public.outcome.2.3' })}
+                    {intl.formatMessage({ id: "programs.public.outcome.2.3" })}
                   </div>
                 </div>
               </div>

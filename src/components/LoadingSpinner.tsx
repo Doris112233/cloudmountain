@@ -2,7 +2,7 @@ import React from 'react';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import './LoadingSpinner.less';
-import { useIntl } from 'umi';
+import { useIntl } from '@umijs/max';
 
 interface LoadingSpinnerProps {
   visible: boolean;
@@ -13,16 +13,19 @@ interface LoadingSpinnerProps {
 const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   visible,
   size = 'large',
-  tip = useIntl().formatMessage({ id: 'loading.tip' }),
+  tip,
 }) => {
+  const intl = useIntl();
   if (!visible) return null;
+
+  const resolvedTip = tip ?? intl.formatMessage({ id: 'loading.tip' });
 
   return (
     <div className="loading-overlay">
       <div className="loading-content">
         <Spin
           size={size}
-          tip={tip}
+          tip={resolvedTip}
           indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
         />
       </div>

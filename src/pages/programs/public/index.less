@@ -1,17 +1,19 @@
-@import '../../base.less';
+@import "../../base.less";
 
-.article-container {
+.program-page {
+  width: calc(100% + 48px);
   margin: -24px -24px 0;
+  overflow: hidden;
 }
 
-.image-container {
+.program-hero {
+  width: 100%;
   position: relative;
-  display: inline-block;
-  object-fit: fill;
 }
 
-.title-img {
-  width: 100vw;
+.program-hero-image {
+  display: block;
+  width: 100%;
   height: auto;
   cursor: pointer;
   overflow: clip;
@@ -21,7 +23,7 @@
   }
 }
 
-.title-overlay {
+.program-hero-title {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -134,7 +136,7 @@
 
   li::before {
     font-size: 20px;
-    content: '• ';
+    content: "• ";
     color: @primary-color; /* or whatever color you prefer */
   }
 }

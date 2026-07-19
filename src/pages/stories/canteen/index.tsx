@@ -1,5 +1,5 @@
 import React from "react";
-import { useIntl } from "umi";
+import { useIntl } from "@umijs/max";
 import { Card, Row, Col } from "antd";
 import "./index.less";
 import CustomDivider from "../../../components/customDivider";

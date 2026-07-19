@@ -1,24 +1,24 @@
-import React, { useEffect } from "react";
-import { useIntl, setLocale } from "umi";
-import { Card, Divider, Row, Col } from "antd";
+import React from "react";
+import { useIntl } from "@umijs/max";
+import { Card, Row, Col } from "antd";
 import "./index.less";
 import data from "../../../data/headpics";
 import programsData from "../../../data/programs";
 import CustomDivider from "../../../components/customDivider";
 import VideoEmbed from "../videoEmbed";
 
-const Community: React.FC = (props) => {
+const Community: React.FC = () => {
   const intl = useIntl();
 
   return (
-    <div className="article-container">
-      <div className="image-container">
+    <div className="article-container program-page">
+      <div className="program-hero">
         <img
-          className="title-img"
+          className="program-hero-image"
           src={data["pc"].src}
           alt="Image Title Loading"
         ></img>
-        <div className="title-overlay">
+        <div className="program-hero-title">
           {intl.formatMessage({ id: "programs.community" })}
         </div>
       </div>

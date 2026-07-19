@@ -19,7 +19,6 @@ const dataArchaeo = [
     distribution: "archive.gibbon1.distribution",
     amount: "archive.gibbon1.amount",
     feature: "archive.gibbon1.feature",
-    imageCount: 2,
     images: [
       `${baseUrl}Hoolock_tianxing_1.jpg`,
       `${baseUrl}Hoolock_tianxing_2.jpg`,
@@ -42,7 +41,6 @@ const dataArchaeo = [
     distribution: "archive.gibbon2.distribution",
     amount: "archive.gibbon2.amount",
     feature: "archive.gibbon2.feature",
-    imageCount: 2,
     images: [
       `${baseUrl}Nomascus_hainanus_1.jpg`,
       `${baseUrl}Nomascus_hainanus_2.jpg`,
@@ -65,7 +63,6 @@ const dataArchaeo = [
     distribution: "archive.gibbon3.distribution",
     amount: "archive.gibbon3.amount",
     feature: "archive.gibbon3.feature",
-    imageCount: 2,
     images: [
       `${baseUrl}Nomascus_nasutus_1.jpg`,
       `${baseUrl}Nomascus_nasutus_2.jpg`,
@@ -88,7 +85,6 @@ const dataArchaeo = [
     distribution: "archive.gibbon4.distribution",
     amount: "archive.gibbon4.amount",
     feature: "archive.gibbon4.feature",
-    imageCount: 2,
     images: [
       `${baseUrl}Nomascus_concolor_1.jpg`,
       `${baseUrl}Nomascus_concolor_2.jpg`,
@@ -111,7 +107,6 @@ const dataArchaeo = [
     distribution: "archive.gibbon5.distribution",
     amount: "archive.gibbon5.amount",
     feature: "archive.gibbon5.feature",
-    imageCount: 2,
     images: [
       `${baseUrl}Nomascus_leucogenys_1.jpg`,
       `${baseUrl}Nomascus_leucogenys_2.jpg`,
@@ -134,7 +129,6 @@ const dataArchaeo = [
     distribution: "archive.gibbon6.distribution",
     amount: "archive.gibbon6.amount",
     feature: "archive.gibbon6.feature",
-    imageCount: 2,
     images: [`${baseUrl}Hylobates_lar_1.jpg`, `${baseUrl}Hylobates_lar_2.jpg`],
   },
   {
@@ -154,7 +148,6 @@ const dataArchaeo = [
     distribution: "archive.gibbon7.distribution",
     amount: "archive.gibbon7.amount",
     feature: "archive.gibbon7.feature",
-    imageCount: 2,
     images: [`${baseUrl}Hoolock_hoolock.jpg`],
   },
 ];

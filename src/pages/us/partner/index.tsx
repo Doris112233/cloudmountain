@@ -1,11 +1,11 @@
 import React from "react";
-import { useIntl, getLocale } from "umi";
+import { getLocale, useIntl } from "@umijs/max";
 import Grid from "@mui/material/Grid";
 import data from "../../../data/partner";
 import "./index.less";
 import Divider from "@mui/material/Divider";
 
-const Partner: React.FC = (props) => {
+const Partner: React.FC = () => {
   const intl = useIntl();
   const currentLocale = getLocale();
   const isChinese = currentLocale === "zh-CN";

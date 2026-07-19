@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { useIntl, setLocale } from "umi";
+import { Link, history, useIntl } from "@umijs/max";
 import { Button } from "antd";
 import { Box } from "@mui/material";
 import "./index.less";
 import data from "../../data/index";
-import { Link, history } from "umi";
 import { CaretRightOutlined } from "@ant-design/icons";
 
 const ellipse1 = data.ellipse1;
 const ellipse2 = data.ellipse2;
 const ellipse3 = data.ellipse3;
 
-const Index: React.FC = (props) => {
+const Index: React.FC = () => {
   const intl = useIntl();
   const [expanded, setExpanded] = useState("wild");
 
@@ -187,6 +186,7 @@ const Index: React.FC = (props) => {
             <Button className="content-button">
               <a
                 target="_blank"
+                rel="noopener noreferrer"
                 href="https://donate.bangbangwang.cn/p/cayw3m54kreo8d7l3x3y3692vnxglzq7?broadcast_channel_id=can9v23wqo8z7mdnzp57vdkl5eg4py1r&ouid=ca2k7n48lw9g1dpg3km9odvqpmoxzr3y&partner_id=ca7nxo5qvzl9gm10qlok67w3rp24e8yk"
               >
                 <b>{intl.formatMessage({ id: "home.support" })}</b>

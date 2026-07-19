@@ -1,5 +1,5 @@
 import React from "react";
-import { useIntl, setLocale } from "umi";
+import { useIntl } from "@umijs/max";
 import Grid from "@mui/material/Grid";
 import { Card, Divider } from "antd";
 import "./index.less";
@@ -11,7 +11,7 @@ import {
   MailOutlined,
 } from "@ant-design/icons";
 
-const Contact: React.FC = (props) => {
+const Contact: React.FC = () => {
   const intl = useIntl();
 
   const pics = data[0];
@@ -88,7 +88,11 @@ const Contact: React.FC = (props) => {
               <GlobalOutlined className="item-icon" />
               {intl.formatMessage({ id: "us.contact.site" })}:
             </div>,
-            <a href="https://www.cloudmountain.cn" target="_blank">
+            <a
+              href="https://www.cloudmountain.cn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               www.cloudmountain.cn
             </a>,
           )}
@@ -156,7 +160,11 @@ const Contact: React.FC = (props) => {
               spacing={1}
             >
               <Grid item xs={2}>
-                <a href="https://weibo.com/p/1006065823202811" target="_blank">
+                <a
+                  href="https://weibo.com/p/1006065823202811"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <img className="media-logo" src={pics.weibo}></img>
                 </a>
               </Grid>
@@ -209,7 +217,11 @@ const Contact: React.FC = (props) => {
               spacing={1}
             >
               <Grid item xs={2}>
-                <a href="https://space.bilibili.com/402317570" target="_blank">
+                <a
+                  href="https://space.bilibili.com/402317570"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <img className="media-logo" src={pics.bilibili}></img>
                 </a>
               </Grid>

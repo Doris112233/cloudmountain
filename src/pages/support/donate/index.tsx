@@ -1,41 +1,40 @@
-import React from 'react';
-import { useIntl, setLocale } from 'umi';
-import Grid from '@mui/material/Grid';
-import data from '../../../data/donate';
-import SwiperCore, { Navigation, Pagination } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper.less';
-import 'swiper/modules/navigation/navigation.less';
-import 'swiper/modules/pagination/pagination.less';
-import 'swiper/modules/autoplay/autoplay.less';
-import './index.less';
+import React from "react";
+import data from "../../../data/donate";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "./index.less";
 
-SwiperCore.use([Navigation, Pagination]);
-
-const Donate: React.FC = (props) => {
-  const intl = useIntl();
-
+const Donate: React.FC = () => {
   const renderSwiper = () => {
     return (
       <div className="index-carousel-container">
         <Swiper
+          modules={[Autoplay, EffectFade, Navigation, Pagination]}
           effect="fade"
           loop={true}
           autoplay={{ delay: 3000 }}
           pagination={{ clickable: true }}
           navigation
           style={{
-            width: '100%',
-            height: '100%',
-            justifyContent: 'center',
-            alignItems: 'center',
+            width: "100%",
+            height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          {data.map((item) => {
+          {data.map((item, index) => {
             return (
-              <SwiperSlide>
+              <SwiperSlide key={item.src}>
                 <div>
-                  <img className="slide-img" src={item.src} />
+                  <img
+                    className="slide-img"
+                    src={item.src}
+                    alt={`云山保护月捐介绍 ${index + 1}`}
+                  />
                 </div>
               </SwiperSlide>
             );

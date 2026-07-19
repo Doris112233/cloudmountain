@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid";
-import { useIntl } from "umi";
+import { useIntl } from "@umijs/max";
 import "./index.less";
 import honorStructure from "../../../data/honorStructure";
 

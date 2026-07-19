@@ -9,6 +9,8 @@
     "sourceMap": true,
     "baseUrl": "./",
     "strict": true,
+    "skipLibCheck": true,
+    "types": ["vitest/globals", "@testing-library/jest-dom", "react", "react-dom", "node"],
     "paths": {
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"]
@@ -20,6 +22,7 @@
     "src/**/*",
     "config/**/*",
     ".umirc.ts",
+    "vitest.config.ts",
     "typings.d.ts"
   ]
 }

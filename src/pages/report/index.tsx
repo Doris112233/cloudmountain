@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useIntl, setLocale } from "umi";
+import { useIntl } from "@umijs/max";
 import Grid from "@mui/material/Grid";
 import { Slider, Modal, Button } from "antd";
 import { useMediaQuery, useTheme } from "@mui/material";
@@ -23,7 +23,7 @@ const Report: React.FC<ReportProps> = (props) => {
   const [loadingStartTime, setLoadingStartTime] = useState<number>(Date.now());
 
   const passedStyle = {
-    color: "#8da745",
+    color: "#89c24b",
   };
 
   // Helper function to build report name based on type
@@ -133,6 +133,7 @@ const Report: React.FC<ReportProps> = (props) => {
     return (
       <Modal
         className="report-pic-viewer"
+        open={picModal}
         footer={null}
         onCancel={() => setPicModal(false)}
       >
@@ -140,6 +141,7 @@ const Report: React.FC<ReportProps> = (props) => {
           <img
             className="report-pic-viewer"
             src={reportStructure[curr].href}
+            alt={getReportName(reportStructure[curr])}
           ></img>
         </div>
       </Modal>
@@ -149,13 +151,18 @@ const Report: React.FC<ReportProps> = (props) => {
   const renderPic = () => {
     if (reportStructure[curr].isAnnual || reportStructure[curr].isPdf) {
       return (
-        <a href={reportStructure[curr].href} target="_blank">
+        <a
+          href={reportStructure[curr].href}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <div className="report-card">
             <img
               style={{ width: "45vh" }}
               src={reportStructure[curr].src}
               onLoad={handleImageLoad}
               onError={handleImageError}
+              alt={getReportName(reportStructure[curr])}
             ></img>
           </div>
         </a>
@@ -169,6 +176,7 @@ const Report: React.FC<ReportProps> = (props) => {
               src={reportStructure[curr].src}
               onLoad={handleImageLoad}
               onError={handleImageError}
+              alt={getReportName(reportStructure[curr])}
             ></img>
           </div>
         </div>

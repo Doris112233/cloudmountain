@@ -7,7 +7,7 @@ import Timeline from '../timeline';
 import Will from '../will';
 import Report from '../../report';
 import { useState } from 'react';
-import { useIntl } from 'umi';
+import { useIntl } from '@umijs/max';
 import { useMediaQuery } from 'react-responsive';
 import Honor from '../honor';
 
