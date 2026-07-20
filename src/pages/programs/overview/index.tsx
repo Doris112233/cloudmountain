@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import { Button } from "antd";
 import "./index.less";
 import data from "../../../data/programs";
+import ProgressiveImage from "../../../components/ProgressiveImage";
 
 const Overview: React.FC = () => {
   const intl = useIntl();
@@ -45,7 +46,12 @@ const Overview: React.FC = () => {
             <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
               <div className="overview-image-card">
                 <div className="image-container">
-                  <img src={card.img} alt={card.title} />
+                  <ProgressiveImage
+                    src={card.img}
+                    alt={card.title}
+                    wrapperClassName="overview-card-media"
+                    objectFit="cover"
+                  />
                 </div>
                 <div className="card-overlay">
                   <h3>{card.title}</h3>

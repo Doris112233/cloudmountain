@@ -2,6 +2,7 @@ import React from "react";
 import { getLocale, useIntl } from "@umijs/max";
 import Grid from "@mui/material/Grid";
 import data from "../../../data/partner";
+import ProgressiveImage from "../../../components/ProgressiveImage";
 import "./index.less";
 import Divider from "@mui/material/Divider";
 
@@ -59,7 +60,12 @@ const Partner: React.FC = () => {
         // Chinese version - show image
         <Grid item xs={12} sm={10} md={8}>
           <div className="partner-image-container">
-            <img src={data.partner} alt="合作伙伴" className="partner-image" />
+            <ProgressiveImage
+              src={data.partner}
+              alt="合作伙伴"
+              className="partner-image"
+              wrapperClassName="partner-progressive-media"
+            />
           </div>
         </Grid>
       ) : (

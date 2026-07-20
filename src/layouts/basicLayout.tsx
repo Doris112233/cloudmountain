@@ -13,9 +13,8 @@ import BasicAnchor from "./anchor";
 import SiteHeader from "./SiteHeader";
 import "./basicLayout.less";
 import data from "@/data";
-import { LoadingProvider } from "@/components/LoadingContext";
-import GlobalLoading from "@/components/GlobalLoading";
-import NavigationLoadingHandler from "@/components/NavigationLoadingHandler";
+import ProgressiveBackground from "@/components/ProgressiveBackground";
+import ProgressiveImage from "@/components/ProgressiveImage";
 
 const { Content, Footer } = Layout;
 
@@ -47,6 +46,7 @@ const socialMedia = [
 const BasicLayout = () => {
   const intl = useIntl();
   const locale = getLocale();
+  const location = useLocation();
 
   const toggleLocale = () => {
     setLocale(locale === "zh-CN" ? "en-US" : "zh-CN");
@@ -54,63 +54,64 @@ const BasicLayout = () => {
 
   return (
     <ConfigProvider theme={{ token: { colorPrimary: "#89c24b" } }}>
-      <LoadingProvider>
-        <ScrollToTop />
-        <NavigationLoadingHandler />
-        <Layout className="site-layout">
-          <SiteHeader
-            locale={locale}
-            translate={(id) => intl.formatMessage({ id })}
-            onNavigate={(path) => history.push(path)}
-            onToggleLocale={toggleLocale}
-          />
-          <Content className="site-content">
-            <Outlet />
-            <BasicAnchor />
-          </Content>
-          <Footer className="site-footer-wrapper">
-            <div className="section-footer">
-              <div className="footer_left">
-                <div className="follow">
-                  <h4>{intl.formatMessage({ id: "footer.follow" })}</h4>
-                </div>
-                <MuiGrid
-                  container
-                  spacing={3}
-                  justifyContent="center"
-                  alignItems="center"
-                >
-                  {socialMedia.map((item) => (
-                    <MuiGrid item key={item.key}>
-                      <a
-                        href={item.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <img
-                          className="social-icon"
-                          src={item.icon}
-                          alt={item.key}
-                        />
-                      </a>
-                    </MuiGrid>
-                  ))}
-                </MuiGrid>
+      <ScrollToTop />
+      <Layout className="site-layout">
+        <SiteHeader
+          locale={locale}
+          currentPath={location.pathname}
+          translate={(id) => intl.formatMessage({ id })}
+          onNavigate={(path) => history.push(path)}
+          onToggleLocale={toggleLocale}
+        />
+        <Content key={location.pathname} className="site-content route-reveal">
+          <Outlet />
+        </Content>
+        <BasicAnchor />
+        <Footer className="site-footer-wrapper">
+          <ProgressiveBackground
+            className="section-footer"
+            src={data.background}
+          >
+            <div className="footer_left">
+              <div className="follow">
+                <h4>{intl.formatMessage({ id: "footer.follow" })}</h4>
               </div>
-              <div className="footer_right">
-                <div className="contact">
-                  <h4>{intl.formatMessage({ id: "footer.contact" })}</h4>
-                  <p>{intl.formatMessage({ id: "footer.address" })}</p>
-                  <p>{intl.formatMessage({ id: "footer.tel" })}</p>
-                  <p>{intl.formatMessage({ id: "footer.site" })}</p>
-                  <p>{intl.formatMessage({ id: "footer.email" })}</p>
-                </div>
+              <MuiGrid
+                container
+                spacing={3}
+                justifyContent="center"
+                alignItems="center"
+              >
+                {socialMedia.map((item) => (
+                  <MuiGrid item key={item.key}>
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <ProgressiveImage
+                        wrapperClassName="social-progressive-media"
+                        className="social-icon"
+                        src={item.icon}
+                        alt={item.key}
+                      />
+                    </a>
+                  </MuiGrid>
+                ))}
+              </MuiGrid>
+            </div>
+            <div className="footer_right">
+              <div className="contact">
+                <h4>{intl.formatMessage({ id: "footer.contact" })}</h4>
+                <p>{intl.formatMessage({ id: "footer.address" })}</p>
+                <p>{intl.formatMessage({ id: "footer.tel" })}</p>
+                <p>{intl.formatMessage({ id: "footer.site" })}</p>
+                <p>{intl.formatMessage({ id: "footer.email" })}</p>
               </div>
             </div>
-          </Footer>
-        </Layout>
-        <GlobalLoading />
-      </LoadingProvider>
+          </ProgressiveBackground>
+        </Footer>
+      </Layout>
     </ConfigProvider>
   );
 };

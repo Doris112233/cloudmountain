@@ -1,4 +1,4 @@
-@import '../base.less';
+@import "../base.less";
 
 .report-bg {
   width: 100%;
@@ -6,6 +6,43 @@
 
 .report-container {
   width: 100%;
+}
+
+.report-timeline-scroll {
+  box-sizing: border-box;
+  width: 100%;
+  height: 70vh;
+  min-height: 480px;
+  overflow-y: auto;
+  overflow-x: visible;
+  padding: 20px 0 28px;
+  scrollbar-width: thin;
+  scrollbar-color: fade(@primary-color, 45%) transparent;
+}
+
+.report-timeline-scroll--desktop {
+  margin-left: -4vh;
+  padding-right: 110px;
+}
+
+.report-timeline-scroll--mobile {
+  padding-right: 0;
+}
+
+.report-timeline-slider {
+  margin: 0 auto;
+}
+
+.report-timeline-slider .ant-slider-mark-text {
+  width: 92px;
+  line-height: 1.2;
+  white-space: normal;
+  text-align: left;
+}
+
+.report-timeline-slider--mobile .ant-slider-mark-text {
+  width: 58px;
+  font-size: 12px;
 }
 
 // .report-box {
@@ -22,6 +59,39 @@
   overflow: hidden;
   box-shadow: 3px 4px 12px 0 rgba(0, 0, 0, 0.8);
   border-radius: 7px;
+}
+
+.report-image-button {
+  display: block;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  cursor: zoom-in;
+}
+
+.report-image-button:focus-visible {
+  outline: 3px solid fade(@primary-color, 45%);
+  outline-offset: 5px;
+  border-radius: 10px;
+}
+
+.report-cover-media {
+  width: 45vh;
+  min-width: 20vh;
+  min-height: 28vh;
+  max-height: 60vh;
+}
+
+.report-cover-media .progressive-media__image {
+  width: 100%;
+  height: auto;
+}
+
+.report-modal-media {
+  width: 45vh;
+  min-height: 45vh;
 }
 
 .report-pic {
@@ -64,6 +134,26 @@
 .MuiGrid-grid-xs-true {
   // display: none;
   background-color: aqua;
+}
+
+@media (max-width: 767px) {
+  .report-box {
+    min-width: 0;
+  }
+
+  .report-card,
+  .report-image-button,
+  .report-cover-media {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .report-modal-media,
+  .report-pic-viewer {
+    width: min(82vw, 45vh);
+    min-width: 0;
+  }
 }
 
 .full-page {

@@ -10,6 +10,10 @@ const BasicAnchor: React.FC = () => {
 
   useEffect(() => {
     if (!gibbonRef.current) return;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reducedMotion) return;
 
     anime({
       targets: gibbonRef.current,
@@ -49,11 +53,13 @@ const BasicAnchor: React.FC = () => {
         color={"#89c24b"}
       >
         <div
+          className="site-contact-anchor"
           style={{
             position: "fixed",
             bottom: "100px",
+            left: 0,
             width: "7vh",
-            zIndex: 5,
+            zIndex: 900,
           }}
         >
           <img

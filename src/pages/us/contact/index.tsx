@@ -3,6 +3,7 @@ import { useIntl } from "@umijs/max";
 import Grid from "@mui/material/Grid";
 import { Card, Divider } from "antd";
 import "./index.less";
+import ProgressiveImage from "../../../components/ProgressiveImage";
 import data from "../../../data/contact";
 import {
   HomeOutlined,
@@ -50,7 +51,13 @@ const Contact: React.FC = () => {
           spacing={1}
         >
           <Grid item xs={5}>
-            <img className="contact-log" src={pics.rectlogo}></img>
+            <ProgressiveImage
+              className="contact-log"
+              wrapperClassName="contact-brand-media"
+              src={pics.rectlogo}
+              alt={intl.formatMessage({ id: "menu.title" })}
+              priority
+            />
           </Grid>
         </Grid>
         <Divider>
@@ -143,10 +150,18 @@ const Contact: React.FC = () => {
               spacing={1}
             >
               <Grid item xs={2}>
-                <img className="media-logo" src={pics.wechat}></img>
+                <ProgressiveImage
+                  className="media-logo"
+                  src={pics.wechat}
+                  alt="WeChat"
+                />
               </Grid>
               <Grid item xs={6}>
-                <img className="media-qr" src={pics.wechat_qr}></img>
+                <ProgressiveImage
+                  className="media-qr"
+                  src={pics.wechat_qr}
+                  alt="WeChat QR code"
+                />
               </Grid>
             </Grid>
             <Grid
@@ -165,11 +180,19 @@ const Contact: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img className="media-logo" src={pics.weibo}></img>
+                  <ProgressiveImage
+                    className="media-logo"
+                    src={pics.weibo}
+                    alt="Weibo"
+                  />
                 </a>
               </Grid>
               <Grid item xs={6}>
-                <img className="media-qr" src={pics.weibo_qr}></img>
+                <ProgressiveImage
+                  className="media-qr"
+                  src={pics.weibo_qr}
+                  alt="Weibo QR code"
+                />
               </Grid>
             </Grid>
             <Grid
@@ -183,10 +206,18 @@ const Contact: React.FC = () => {
               spacing={1}
             >
               <Grid item xs={2}>
-                <img className="media-logo" src={pics.tiktok}></img>
+                <ProgressiveImage
+                  className="media-logo"
+                  src={pics.tiktok}
+                  alt="Douyin"
+                />
               </Grid>
               <Grid item xs={6}>
-                <img className="media-qr" src={pics.tiktok_qr}></img>
+                <ProgressiveImage
+                  className="media-qr"
+                  src={pics.tiktok_qr}
+                  alt="Douyin QR code"
+                />
               </Grid>
             </Grid>
             <Grid
@@ -200,10 +231,18 @@ const Contact: React.FC = () => {
               spacing={1}
             >
               <Grid item xs={2}>
-                <img className="media-logo" src={pics.xiaohongshu}></img>
+                <ProgressiveImage
+                  className="media-logo"
+                  src={pics.xiaohongshu}
+                  alt="Xiaohongshu"
+                />
               </Grid>
               <Grid item xs={6}>
-                <img className="media-qr" src={pics.xiaohongshu_qr}></img>
+                <ProgressiveImage
+                  className="media-qr"
+                  src={pics.xiaohongshu_qr}
+                  alt="Xiaohongshu QR code"
+                />
               </Grid>
             </Grid>
             <Grid
@@ -222,11 +261,19 @@ const Contact: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img className="media-logo" src={pics.bilibili}></img>
+                  <ProgressiveImage
+                    className="media-logo"
+                    src={pics.bilibili}
+                    alt="Bilibili"
+                  />
                 </a>
               </Grid>
               <Grid item xs={6}>
-                <img className="media-qr" src={pics.bilibili_qr}></img>
+                <ProgressiveImage
+                  className="media-qr"
+                  src={pics.bilibili_qr}
+                  alt="Bilibili QR code"
+                />
               </Grid>
             </Grid>
           </Grid>

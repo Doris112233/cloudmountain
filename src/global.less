@@ -1,0 +1,66 @@
+@primary-color: #89c24b;
+
+.route-reveal {
+  animation: route-reveal 220ms ease-out both;
+}
+
+:where(a, button, [role="button"], .ant-menu-item, .ant-menu-submenu-title) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:where(a, button, [role="button"]):focus-visible {
+  outline: 3px solid fade(@primary-color, 48%);
+  outline-offset: 3px;
+}
+
+.ant-btn:not(:disabled),
+a,
+[role="button"] {
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.ant-btn:not(:disabled):active,
+[role="button"]:active {
+  transform: translateY(1px) scale(0.985);
+}
+
+@media (hover: hover) {
+  .ant-btn:not(:disabled):hover {
+    box-shadow: 0 5px 14px fade(@primary-color, 20%);
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes route-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .route-reveal,
+  .ant-btn,
+  [role="button"] {
+    transform: none !important;
+  }
+}

@@ -1,23 +1,23 @@
-import React from 'react';
+import React from "react";
 
 const customDivider: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-  textAlign: 'center',
-  margin: '24px 0',
+  display: "flex",
+  alignItems: "center",
+  textAlign: "center",
+  margin: "24px 0",
 };
 
 const dividerTitle: React.CSSProperties = {
-  padding: '0 16px',
-  fontWeight: 'bold',
-  fontSize: '18px',
-  whiteSpace: 'normal',
+  padding: "0 16px",
+  fontWeight: "bold",
+  fontSize: "18px",
+  whiteSpace: "normal",
 };
 
 const dividerLine: React.CSSProperties = {
-  content: '',
+  content: "",
   flex: 1,
-  borderBottom: '1px solid #e8e8e8',
+  borderBottom: "1px solid #e8e8e8",
 };
 
 const CustomDivider: React.FC<{ children: React.ReactNode }> = ({

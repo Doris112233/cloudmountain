@@ -4,6 +4,7 @@ import { Card, Row, Col } from "antd";
 import "./index.less";
 import data from "../../../data/headpics";
 import CustomDivider from "@/components/customDivider";
+import ProgressiveImage from "../../../components/ProgressiveImage";
 
 const Public: React.FC = () => {
   const intl = useIntl();
@@ -11,11 +12,14 @@ const Public: React.FC = () => {
   return (
     <div className="article-container program-page">
       <div className="program-hero">
-        <img
+        <ProgressiveImage
+          wrapperClassName="program-hero-media"
           className="program-hero-image"
           src={data["pp"].src}
-          alt="Image Title Loading"
-        ></img>
+          alt={intl.formatMessage({ id: "programs.public" })}
+          objectFit="cover"
+          priority
+        />
         <div className="program-hero-title">
           {intl.formatMessage({ id: "programs.public" })}
         </div>

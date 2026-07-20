@@ -6,7 +6,7 @@ import { useMediaQuery, useTheme } from "@mui/material";
 import type { SliderMarks } from "antd/es/slider";
 import "./index.less";
 import reportStructure from "../../data/reportStructure";
-import LoadingSpinner from "../../components/LoadingSpinner";
+import ProgressiveImage from "../../components/ProgressiveImage";
 
 interface ReportProps {
   initCurr: number;
@@ -19,8 +19,6 @@ const Report: React.FC<ReportProps> = (props) => {
 
   const [curr, setCurr] = useState<number>(props.initCurr ? props.initCurr : 0);
   const [picModal, setPicModal] = useState<boolean>(false);
-  const [imageLoading, setImageLoading] = useState<boolean>(true);
-  const [loadingStartTime, setLoadingStartTime] = useState<number>(Date.now());
 
   const passedStyle = {
     color: "#89c24b",
@@ -84,6 +82,8 @@ const Report: React.FC<ReportProps> = (props) => {
 
   const masksBig: SliderMarks = {};
   const masksSmall: SliderMarks = {};
+  const timelineHeight = Math.max(reportStructure.length * 52, 1000);
+  const mobileTimelineHeight = Math.max(reportStructure.length * 44, 900);
 
   reportStructure.forEach((item, index) => {
     const reportName = getReportName(item, false);
@@ -105,28 +105,8 @@ const Report: React.FC<ReportProps> = (props) => {
     };
   });
 
-  const handleImageLoad = () => {
-    const loadingDuration = Date.now() - loadingStartTime;
-    const minLoadingTime = 300;
-
-    if (loadingDuration < minLoadingTime) {
-      setTimeout(
-        () => setImageLoading(false),
-        minLoadingTime - loadingDuration,
-      );
-    } else {
-      setImageLoading(false);
-    }
-  };
-
-  const handleImageError = () => {
-    setImageLoading(false);
-  };
-
   const handleSliderChange = (value: number) => {
     setCurr(value);
-    setImageLoading(true); // Reset loading state when changing reports
-    setLoadingStartTime(Date.now()); // Record when loading started
   };
 
   const renderPictureModal = () => {
@@ -138,11 +118,12 @@ const Report: React.FC<ReportProps> = (props) => {
         onCancel={() => setPicModal(false)}
       >
         <div className="report-pic-viewer">
-          <img
+          <ProgressiveImage
+            wrapperClassName="report-modal-media"
             className="report-pic-viewer"
             src={reportStructure[curr].href}
             alt={getReportName(reportStructure[curr])}
-          ></img>
+          />
         </div>
       </Modal>
     );
@@ -157,29 +138,34 @@ const Report: React.FC<ReportProps> = (props) => {
           rel="noopener noreferrer"
         >
           <div className="report-card">
-            <img
-              style={{ width: "45vh" }}
+            <ProgressiveImage
+              key={reportStructure[curr].src}
+              wrapperClassName="report-cover-media"
+              style={{ width: "100%" }}
               src={reportStructure[curr].src}
-              onLoad={handleImageLoad}
-              onError={handleImageError}
               alt={getReportName(reportStructure[curr])}
-            ></img>
+            />
           </div>
         </a>
       );
     } else {
       return (
-        <div onClick={() => setPicModal(true)}>
+        <button
+          type="button"
+          className="report-image-button"
+          aria-label={getReportName(reportStructure[curr])}
+          onClick={() => setPicModal(true)}
+        >
           <div className="report-card">
-            <img
+            <ProgressiveImage
+              key={reportStructure[curr].src}
+              wrapperClassName="report-cover-media"
               className="report-pic"
               src={reportStructure[curr].src}
-              onLoad={handleImageLoad}
-              onError={handleImageError}
               alt={getReportName(reportStructure[curr])}
-            ></img>
+            />
           </div>
-        </div>
+        </button>
       );
     }
   };
@@ -195,11 +181,10 @@ const Report: React.FC<ReportProps> = (props) => {
       >
         <Grid item xs={4} sm={3} md={2} className="report-box">
           {!isMobile && (
-            <div
-              style={{ height: "70vh", overflow: "scroll", marginLeft: "-4vh" }}
-            >
+            <div className="report-timeline-scroll report-timeline-scroll--desktop">
               <Slider
-                style={{ height: "100vh", marginTop: "20px" }}
+                className="report-timeline-slider report-timeline-slider--desktop"
+                style={{ height: timelineHeight }}
                 // tooltipVisible={false}
                 marks={masksBig}
                 defaultValue={curr}
@@ -213,9 +198,10 @@ const Report: React.FC<ReportProps> = (props) => {
             </div>
           )}
           {isMobile && (
-            <div style={{ height: "70vh", overflow: "scroll" }}>
+            <div className="report-timeline-scroll report-timeline-scroll--mobile">
               <Slider
-                style={{ height: "100vh" }}
+                className="report-timeline-slider report-timeline-slider--mobile"
+                style={{ height: mobileTimelineHeight }}
                 // tooltipVisible={false}
                 marks={masksSmall}
                 defaultValue={curr}
@@ -240,11 +226,6 @@ const Report: React.FC<ReportProps> = (props) => {
           alignItems="center"
         >
           <Grid item xs={12} style={{ margin: "auto", position: "relative" }}>
-            <LoadingSpinner
-              visible={imageLoading}
-              size="large"
-              tip="加载中..."
-            />
             {renderPic()}
           </Grid>
           {/* <Grid item>

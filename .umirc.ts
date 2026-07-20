@@ -16,6 +16,10 @@ export default defineConfig({
   codeSplitting: {
     jsStrategy: "granularChunks",
   },
+  routePrefetch: {
+    defaultPrefetch: "intent",
+    defaultPrefetchTimeout: 80,
+  },
   esbuildMinifyIIFE: true,
   favicons: ["/favicon.ico"],
   routes: [

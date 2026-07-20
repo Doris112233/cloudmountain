@@ -5,6 +5,7 @@ import { Box } from "@mui/material";
 import "./index.less";
 import data from "../../data/index";
 import { CaretRightOutlined } from "@ant-design/icons";
+import ProgressiveImage from "../../components/ProgressiveImage";
 
 const ellipse1 = data.ellipse1;
 const ellipse2 = data.ellipse2;
@@ -42,7 +43,13 @@ const Index: React.FC = () => {
     <div className="full-page">
       <div className="section-container section-head">
         <div className="image-head-section">
-          <img src={data.headpic} />
+          <ProgressiveImage
+            src={data.headpic}
+            alt={intl.formatMessage({ id: "home.title" })}
+            wrapperClassName="home-hero-media"
+            objectFit="cover"
+            priority
+          />
         </div>
         <div className="text-head-section">
           <h1>{intl.formatMessage({ id: "home.title" })}</h1>
@@ -84,7 +91,12 @@ const Index: React.FC = () => {
 
       <div className="section-container section-why">
         <div className="why-image-section">
-          <img src={data.map} alt="Gibbon distribution map" />
+          <ProgressiveImage
+            src={data.map}
+            alt="Gibbon distribution map"
+            wrapperClassName="home-map-media"
+            objectFit="contain"
+          />
         </div>
         <div className="why-text-section">
           <div className="content-title">
@@ -121,7 +133,8 @@ const Index: React.FC = () => {
         </div>
         <div className="work-right">
           {cards.map((card) => (
-            <div
+            <button
+              type="button"
               key={card.key}
               className={`work-card ${card.key} ${
                 expanded === card.key ? "expanded" : "shrunk"
@@ -134,13 +147,18 @@ const Index: React.FC = () => {
                 }
               }}
             >
-              <img src={card.img} alt={card.longLabel} />
+              <ProgressiveImage
+                src={card.img}
+                alt={card.longLabel}
+                wrapperClassName="work-card-media"
+                objectFit="cover"
+              />
               <div className="work-card-label">
                 <span>
                   {expanded === card.key ? card.longLabel : card.shortLabel}
                 </span>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
@@ -152,7 +170,12 @@ const Index: React.FC = () => {
           <div className="story-card">
             <div className="story-card-image">
               <Link to="/stories/canteen">
-                <img src={data.story1} alt="story1" />
+                <ProgressiveImage
+                  src={data.story1}
+                  alt={intl.formatMessage({ id: "home.story.card1" })}
+                  wrapperClassName="story-card-media"
+                  objectFit="cover"
+                />
               </Link>
             </div>
             <p>
@@ -165,7 +188,12 @@ const Index: React.FC = () => {
           <div className="story-card">
             <div className="story-card-image">
               <Link to="/stories/community">
-                <img src={data.story2} alt="story2" />
+                <ProgressiveImage
+                  src={data.story2}
+                  alt={intl.formatMessage({ id: "home.story.card2" })}
+                  wrapperClassName="story-card-media"
+                  objectFit="cover"
+                />
               </Link>
             </div>
             <p>

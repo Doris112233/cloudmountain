@@ -3,9 +3,11 @@ import { Button, Drawer, Grid, Layout, Menu } from "antd";
 import type { MenuProps } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import logo from "../public/logo.png";
+import ProgressiveImage from "../components/ProgressiveImage";
 
 interface SiteHeaderProps {
   locale: string;
+  currentPath: string;
   translate: (id: string) => string;
   onNavigate: (path: string) => void;
   onToggleLocale: () => void;
@@ -56,6 +58,7 @@ export const createNavigationItems = (
 
 const SiteHeader = ({
   locale,
+  currentPath,
   translate,
   onNavigate,
   onToggleLocale,
@@ -78,13 +81,19 @@ const SiteHeader = ({
         onClick={() => onNavigate("/")}
         aria-label={translate("menu.home")}
       >
-        <img src={logo} alt={translate("menu.title")} />
+        <ProgressiveImage
+          src={logo}
+          alt={translate("menu.title")}
+          wrapperClassName="site-logo-media"
+          priority
+        />
       </button>
       {isDesktop ? (
         <Menu
           className="site-menu"
           mode="horizontal"
           items={items}
+          selectedKeys={[currentPath]}
           onClick={navigate}
         />
       ) : (
@@ -103,7 +112,12 @@ const SiteHeader = ({
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
       >
-        <Menu mode="inline" items={items} onClick={navigate} />
+        <Menu
+          mode="inline"
+          items={items}
+          selectedKeys={[currentPath]}
+          onClick={navigate}
+        />
       </Drawer>
     </Layout.Header>
   );

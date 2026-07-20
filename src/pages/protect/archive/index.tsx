@@ -9,45 +9,19 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "./index.less";
 import { SoundOutlined, PauseOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
 import { ArchiveAudioController } from "./audioController";
 import { archiveAudioUrls, normalizeArchiveId } from "./utils";
+import ProgressiveImage from "../../../components/ProgressiveImage";
 
-const ImgViewer = (props: { src: string; intl: any }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+const ImgViewer = (props: { src: string; alt: string }) => {
   return (
-    <div
-      style={{
-        position: "relative",
-        minHeight: "30rem",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <div style={{ display: isLoading ? "none" : "block" }}>
-        <img
-          onLoad={() => setIsLoading(false)}
-          style={{ height: "30rem" }}
-          src={props.src}
-          alt=""
-        />
-      </div>
-      <div
-        style={{
-          display: isLoading ? "flex" : "none",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "30rem",
-          width: "100%",
-        }}
-      >
-        <Spin
-          size="large"
-          tip={props.intl.formatMessage({ id: "loading.tip" })}
-        />
-      </div>
-    </div>
+    <ProgressiveImage
+      src={props.src}
+      alt={props.alt}
+      wrapperClassName="archive-progressive-media"
+      style={{ height: "30rem", width: "100%" }}
+      objectFit="contain"
+    />
   );
 };
 
@@ -99,7 +73,7 @@ export default () => {
             <p>{intl.formatMessage({ id: "protect.inChina.content.1" })}</p>
             <p>{intl.formatMessage({ id: "protect.inChina.content.2" })}</p>
             <div className="image-row">
-              <img
+              <ProgressiveImage
                 src={dataArchaeo.archaeo1}
                 alt={intl.formatMessage({ id: "protect.inChina.content.3" })}
               />
@@ -110,7 +84,7 @@ export default () => {
             <p>{intl.formatMessage({ id: "protect.inChina.content.5" })}</p>
           </div>
           <div className="vertical-image">
-            <img src={dataArchaeo.archaeo2} alt="青铜长臂猿" />
+            <ProgressiveImage src={dataArchaeo.archaeo2} alt="青铜长臂猿" />
           </div>
         </div>
       </section>
@@ -184,7 +158,10 @@ export default () => {
                   {data[selected].images.map((image) => (
                     <SwiperSlide key={image}>
                       <Container maxWidth="sm" style={{ textAlign: "center" }}>
-                        <ImgViewer src={image} intl={intl}></ImgViewer>
+                        <ImgViewer
+                          src={image}
+                          alt={intl.formatMessage({ id: data[selected].name })}
+                        />
                       </Container>
                     </SwiperSlide>
                   ))}

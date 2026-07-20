@@ -6,6 +6,7 @@ import data from "../../../data/headpics";
 import programsData from "../../../data/programs";
 import CustomDivider from "../../../components/customDivider";
 import VideoEmbed from "../videoEmbed";
+import ProgressiveImage from "../../../components/ProgressiveImage";
 
 const Investigation: React.FC = () => {
   const intl = useIntl();
@@ -13,11 +14,14 @@ const Investigation: React.FC = () => {
   return (
     <div className="article-container program-page">
       <div className="program-hero">
-        <img
+        <ProgressiveImage
+          wrapperClassName="program-hero-media"
           className="program-hero-image"
           src={data["pi2"].src}
-          alt="Image Title Loading"
-        ></img>
+          alt={intl.formatMessage({ id: "programs.investigation" })}
+          objectFit="cover"
+          priority
+        />
         <div className="program-hero-title">
           {intl.formatMessage({ id: "programs.investigation" })}
         </div>
@@ -110,7 +114,8 @@ const Investigation: React.FC = () => {
                 </div>
                 <div className="section-item">
                   <div className="section-image">
-                    <img
+                    <ProgressiveImage
+                      wrapperClassName="project-section-media"
                       src={programsData.investigation1}
                       alt="Investigation Program 1"
                     />
@@ -182,7 +187,8 @@ const Investigation: React.FC = () => {
                 </div>
                 <div className="section-item">
                   <div className="section-image">
-                    <img
+                    <ProgressiveImage
+                      wrapperClassName="project-section-media"
                       src={programsData.investigation2}
                       alt="Investigation Program 2"
                     />
@@ -443,7 +449,8 @@ const Investigation: React.FC = () => {
                 </div>
                 <div className="section-item">
                   <div className="section-image">
-                    <img
+                    <ProgressiveImage
+                      wrapperClassName="project-section-media"
                       src={programsData.investigation6}
                       alt="Investigation Program 6"
                     />

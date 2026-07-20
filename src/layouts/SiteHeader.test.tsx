@@ -35,6 +35,7 @@ describe("SiteHeader", () => {
     render(
       <SiteHeader
         locale="zh-CN"
+        currentPath="/programs/overview"
         translate={translate}
         onNavigate={onNavigate}
         onToggleLocale={onToggleLocale}
