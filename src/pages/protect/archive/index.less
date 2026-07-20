@@ -184,3 +184,32 @@
     }
   }
 }
+
+.archive-content-transition {
+  animation: archive-content-enter 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.archive-audio-button.is-playing {
+  animation: archive-audio-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes archive-content-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes archive-audio-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 fade(@primary-color, 36%);
+  }
+  50% {
+    box-shadow: 0 0 0 10px fade(@primary-color, 0%);
+  }
+}

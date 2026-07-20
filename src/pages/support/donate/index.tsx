@@ -17,7 +17,11 @@ const Donate: React.FC = () => {
           modules={[Autoplay, EffectFade, Navigation, Pagination]}
           effect="fade"
           loop={true}
-          autoplay={{ delay: 3000 }}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true,
+          }}
           pagination={{ clickable: true }}
           navigation
           style={{

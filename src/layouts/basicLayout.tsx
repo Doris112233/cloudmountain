@@ -15,6 +15,7 @@ import "./basicLayout.less";
 import data from "@/data";
 import ProgressiveBackground from "@/components/ProgressiveBackground";
 import ProgressiveImage from "@/components/ProgressiveImage";
+import MotionDocument from "@/components/motion/MotionDocument";
 
 const { Content, Footer } = Layout;
 
@@ -64,6 +65,7 @@ const BasicLayout = () => {
           onToggleLocale={toggleLocale}
         />
         <Content key={location.pathname} className="site-content route-reveal">
+          <MotionDocument routeKey={`${location.pathname}${location.search}`} />
           <Outlet />
         </Content>
         <BasicAnchor />

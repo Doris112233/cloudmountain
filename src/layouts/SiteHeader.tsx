@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Drawer, Grid, Layout, Menu } from "antd";
 import type { MenuProps } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
@@ -64,9 +64,17 @@ const SiteHeader = ({
   onToggleLocale,
 }: SiteHeaderProps) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const screens = Grid.useBreakpoint();
   const isDesktop = screens.md;
   const items = createNavigationItems(translate);
+
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 18);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
 
   const navigate: MenuProps["onClick"] = ({ key }) => {
     onNavigate(key);
@@ -74,7 +82,7 @@ const SiteHeader = ({
   };
 
   return (
-    <Layout.Header className="site-header">
+    <Layout.Header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
       <button
         type="button"
         className="site-logo-button"

@@ -216,10 +216,11 @@ const Report: React.FC<ReportProps> = (props) => {
           )}
         </Grid>
         <Grid
+          key={curr}
           item
           xs={8}
           sm={8}
-          className="report-box"
+          className="report-box report-selection-transition"
           container
           direction="column"
           justifyContent="flex-start"

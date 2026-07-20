@@ -5,6 +5,7 @@ import "./index.less";
 import data from "../../../data/headpics";
 import CustomDivider from "@/components/customDivider";
 import ProgressiveImage from "../../../components/ProgressiveImage";
+import ParallaxMedia from "../../../components/motion/ParallaxMedia";
 
 const Public: React.FC = () => {
   const intl = useIntl();
@@ -12,14 +13,16 @@ const Public: React.FC = () => {
   return (
     <div className="article-container program-page">
       <div className="program-hero">
-        <ProgressiveImage
-          wrapperClassName="program-hero-media"
-          className="program-hero-image"
-          src={data["pp"].src}
-          alt={intl.formatMessage({ id: "programs.public" })}
-          objectFit="cover"
-          priority
-        />
+        <ParallaxMedia amount={24}>
+          <ProgressiveImage
+            wrapperClassName="program-hero-media"
+            className="program-hero-image"
+            src={data["pp"].src}
+            alt={intl.formatMessage({ id: "programs.public" })}
+            objectFit="cover"
+            priority
+          />
+        </ParallaxMedia>
         <div className="program-hero-title">
           {intl.formatMessage({ id: "programs.public" })}
         </div>

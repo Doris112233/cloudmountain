@@ -1,0 +1,71 @@
+@primary-color: #89c24b;
+
+.motion-reveal {
+  --motion-distance: 28px;
+  --motion-delay: 0ms;
+  --motion-duration: 760ms;
+  opacity: 0;
+  will-change: opacity, transform;
+  transition:
+    opacity var(--motion-duration) cubic-bezier(0.22, 1, 0.36, 1)
+      var(--motion-delay),
+    transform var(--motion-duration) cubic-bezier(0.22, 1, 0.36, 1)
+      var(--motion-delay);
+}
+
+.motion-reveal--up {
+  transform: translate3d(0, var(--motion-distance), 0);
+}
+.motion-reveal--down {
+  transform: translate3d(0, calc(var(--motion-distance) * -1), 0);
+}
+.motion-reveal--left {
+  transform: translate3d(var(--motion-distance), 0, 0);
+}
+.motion-reveal--right {
+  transform: translate3d(calc(var(--motion-distance) * -1), 0, 0);
+}
+.motion-reveal--none {
+  transform: none;
+}
+.motion-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.parallax-media {
+  --parallax-x: 0px;
+  --parallax-y: 0px;
+  transform: translate3d(var(--parallax-x), var(--parallax-y), 0);
+  will-change: transform;
+}
+
+.motion-auto-reveal {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition:
+    opacity 680ms cubic-bezier(0.22, 1, 0.36, 1) var(--auto-delay, 0ms),
+    transform 680ms cubic-bezier(0.22, 1, 0.36, 1) var(--auto-delay, 0ms);
+}
+
+.motion-auto-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-reveal,
+  .motion-reveal.is-visible,
+  .parallax-media {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .motion-auto-reveal,
+  .motion-auto-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

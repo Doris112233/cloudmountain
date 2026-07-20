@@ -108,6 +108,7 @@ export default () => {
             <Grid item xs={2} sm={3} md={3}>
               <Button
                 type="primary"
+                className={`archive-audio-button ${isPlaying ? "is-playing" : ""}`}
                 style={{ marginTop: 10 }}
                 onClick={playAudio}
                 icon={isPlaying ? <PauseOutlined /> : <SoundOutlined />}
@@ -145,12 +146,14 @@ export default () => {
             </Grid>
           </Grid>
           <Grid
+            key={selected}
             item
             xs={12}
             container
             justifyContent="center"
             alignItems="flex-start"
             spacing={2}
+            className="archive-content-transition"
           >
             <Grid item xs={12} sm={6} md={5} className="archiveItem">
               <Card>

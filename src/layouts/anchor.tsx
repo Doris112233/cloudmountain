@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import anime from "animejs/lib/anime.es.js";
 import { Tooltip } from "antd";
 import { Link, useIntl } from "@umijs/max";
@@ -7,6 +7,18 @@ import "./anchor.less";
 const BasicAnchor: React.FC = () => {
   const intl = useIntl();
   const gibbonRef = useRef<HTMLImageElement | null>(null);
+  const [nearFooter, setNearFooter] = useState(false);
+
+  useEffect(() => {
+    const footer = document.querySelector(".site-footer-wrapper");
+    if (!footer) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setNearFooter(entry.isIntersecting),
+      { rootMargin: "120px 0px 0px" },
+    );
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!gibbonRef.current) return;
@@ -53,7 +65,7 @@ const BasicAnchor: React.FC = () => {
         color={"#89c24b"}
       >
         <div
-          className="site-contact-anchor"
+          className={`site-contact-anchor ${nearFooter ? "is-near-footer" : ""}`}
           style={{
             position: "fixed",
             bottom: "100px",

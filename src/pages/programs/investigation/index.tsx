@@ -7,6 +7,7 @@ import programsData from "../../../data/programs";
 import CustomDivider from "../../../components/customDivider";
 import VideoEmbed from "../videoEmbed";
 import ProgressiveImage from "../../../components/ProgressiveImage";
+import ParallaxMedia from "../../../components/motion/ParallaxMedia";
 
 const Investigation: React.FC = () => {
   const intl = useIntl();
@@ -14,14 +15,16 @@ const Investigation: React.FC = () => {
   return (
     <div className="article-container program-page">
       <div className="program-hero">
-        <ProgressiveImage
-          wrapperClassName="program-hero-media"
-          className="program-hero-image"
-          src={data["pi2"].src}
-          alt={intl.formatMessage({ id: "programs.investigation" })}
-          objectFit="cover"
-          priority
-        />
+        <ParallaxMedia amount={24}>
+          <ProgressiveImage
+            wrapperClassName="program-hero-media"
+            className="program-hero-image"
+            src={data["pi2"].src}
+            alt={intl.formatMessage({ id: "programs.investigation" })}
+            objectFit="cover"
+            priority
+          />
+        </ParallaxMedia>
         <div className="program-hero-title">
           {intl.formatMessage({ id: "programs.investigation" })}
         </div>

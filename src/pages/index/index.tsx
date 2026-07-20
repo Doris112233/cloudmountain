@@ -6,6 +6,9 @@ import "./index.less";
 import data from "../../data/index";
 import { CaretRightOutlined } from "@ant-design/icons";
 import ProgressiveImage from "../../components/ProgressiveImage";
+import Reveal from "../../components/motion/Reveal";
+import ParallaxMedia from "../../components/motion/ParallaxMedia";
+import { useTilt } from "../../components/motion/useTilt";
 
 const ellipse1 = data.ellipse1;
 const ellipse2 = data.ellipse2;
@@ -14,6 +17,7 @@ const ellipse3 = data.ellipse3;
 const Index: React.FC = () => {
   const intl = useIntl();
   const [expanded, setExpanded] = useState("wild");
+  const tilt = useTilt();
 
   const cards = [
     {
@@ -41,17 +45,19 @@ const Index: React.FC = () => {
 
   return (
     <div className="full-page">
-      <div className="section-container section-head">
+      <div className="section-container section-head home-hero-enter">
         <div className="image-head-section">
-          <ProgressiveImage
-            src={data.headpic}
-            alt={intl.formatMessage({ id: "home.title" })}
-            wrapperClassName="home-hero-media"
-            objectFit="cover"
-            priority
-          />
+          <ParallaxMedia amount={16} className="home-hero-parallax">
+            <ProgressiveImage
+              src={data.headpic}
+              alt={intl.formatMessage({ id: "home.title" })}
+              wrapperClassName="home-hero-media"
+              objectFit="cover"
+              priority
+            />
+          </ParallaxMedia>
         </div>
-        <div className="text-head-section">
+        <Reveal className="text-head-section" direction="left" delay={100}>
           <h1>{intl.formatMessage({ id: "home.title" })}</h1>
           <p>{intl.formatMessage({ id: "home.description" })}</p>
           <Box
@@ -86,19 +92,21 @@ const Index: React.FC = () => {
               </Link>
             </Button>
           </Box>
-        </div>
+        </Reveal>
       </div>
 
       <div className="section-container section-why">
-        <div className="why-image-section">
-          <ProgressiveImage
-            src={data.map}
-            alt="Gibbon distribution map"
-            wrapperClassName="home-map-media"
-            objectFit="contain"
-          />
-        </div>
-        <div className="why-text-section">
+        <Reveal className="why-image-section" direction="right">
+          <ParallaxMedia amount={28}>
+            <ProgressiveImage
+              src={data.map}
+              alt="Gibbon distribution map"
+              wrapperClassName="home-map-media"
+              objectFit="contain"
+            />
+          </ParallaxMedia>
+        </Reveal>
+        <Reveal className="why-text-section" direction="left" delay={120}>
           <div className="content-title">
             <h2>{intl.formatMessage({ id: "home.why.title" })}</h2>
           </div>
@@ -112,11 +120,11 @@ const Index: React.FC = () => {
               </Link>
             </Button>
           </div>
-        </div>
+        </Reveal>
       </div>
 
       <div className="section-container section-work">
-        <div className="work-left">
+        <Reveal className="work-left" direction="right">
           <div className="content-title">
             <h2>{intl.formatMessage({ id: "home.work.title" })}</h2>
           </div>
@@ -130,15 +138,24 @@ const Index: React.FC = () => {
               </Link>
             </Button>
           </div>
-        </div>
-        <div className="work-right">
+        </Reveal>
+        <Reveal
+          className={`work-right motion-card-group has-${expanded}`}
+          direction="left"
+          delay={100}
+        >
           {cards.map((card) => (
             <button
               type="button"
               key={card.key}
-              className={`work-card ${card.key} ${
+              aria-pressed={expanded === card.key}
+              style={
+                { "--card-order": cards.indexOf(card) } as React.CSSProperties
+              }
+              className={`work-card motion-tilt-card ${card.key} ${
                 expanded === card.key ? "expanded" : "shrunk"
               }`}
+              {...tilt}
               onClick={() => {
                 if (expanded === card.key) {
                   history.push(card.path);
@@ -160,14 +177,14 @@ const Index: React.FC = () => {
               </div>
             </button>
           ))}
-        </div>
+        </Reveal>
       </div>
       <div className="section-story">
         <div className="story-title">
           <h2>{intl.formatMessage({ id: "home.story.title" })}</h2>
         </div>
         <div className="story-cards">
-          <div className="story-card">
+          <Reveal className="story-card" direction="up">
             <div className="story-card-image">
               <Link to="/stories/canteen">
                 <ProgressiveImage
@@ -184,8 +201,8 @@ const Index: React.FC = () => {
                 <span className="arrow">{">"}</span>
               </Link>
             </p>
-          </div>
-          <div className="story-card">
+          </Reveal>
+          <Reveal className="story-card" direction="up" delay={120}>
             <div className="story-card-image">
               <Link to="/stories/community">
                 <ProgressiveImage
@@ -202,11 +219,11 @@ const Index: React.FC = () => {
                 <span className="arrow">{">"}</span>
               </Link>
             </p>
-          </div>
+          </Reveal>
         </div>
       </div>
-      <div className="section-support">
-        <div className="support-content">
+      <Reveal className="section-support" direction="none">
+        <ParallaxMedia className="support-content" amount={18}>
           <div className="content-desc support-desc">
             <h2>{intl.formatMessage({ id: "home.support.content" })}</h2>
           </div>
@@ -221,8 +238,8 @@ const Index: React.FC = () => {
               </a>
             </Button>
           </div>
-        </div>
-      </div>
+        </ParallaxMedia>
+      </Reveal>
     </div>
   );
 };
