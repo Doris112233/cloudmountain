@@ -8,6 +8,7 @@ export interface ParallaxMediaProps {
   className?: string;
   amount?: number;
   axis?: "x" | "y";
+  clip?: boolean;
   style?: CSSProperties;
 }
 
@@ -16,6 +17,7 @@ const ParallaxMedia = ({
   className = "",
   amount = 22,
   axis = "y",
+  clip = true,
   style,
 }: ParallaxMediaProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -72,10 +74,13 @@ const ParallaxMedia = ({
   }, [amount, axis, reducedMotion, visible]);
 
   return (
-    <div className={`parallax-media ${className}`} style={style}>
+    <div
+      className={`parallax-media ${clip ? "" : "parallax-media--unclipped"} ${className}`}
+      style={style}
+    >
       <div
         ref={ref}
-        className={`parallax-media__layer parallax-media__layer--${axis}`}
+        className={`parallax-media__layer ${clip ? `parallax-media__layer--${axis}` : "parallax-media__layer--content"}`}
         style={
           {
             "--parallax-overscan": `${amount * 2 + 8}px`,

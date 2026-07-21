@@ -38,6 +38,10 @@
   overflow: hidden;
 }
 
+.parallax-media--unclipped {
+  overflow: visible;
+}
+
 .parallax-media__layer {
   --parallax-x: 0px;
   --parallax-y: 0px;
@@ -55,6 +59,10 @@
 .parallax-media__layer--x {
   width: calc(100% + var(--parallax-overscan));
   margin-left: calc(var(--parallax-overscan) / -2);
+}
+
+.parallax-media__layer--content {
+  height: auto;
 }
 
 .motion-auto-reveal {

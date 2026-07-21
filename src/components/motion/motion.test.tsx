@@ -88,4 +88,18 @@ describe("motion primitives", () => {
     expect(image.parentElement).toHaveStyle("--parallax-overscan: 40px");
     expect(image.parentElement?.parentElement).toHaveClass("parallax-media");
   });
+
+  it("keeps flowing content visible when clipping is disabled", () => {
+    render(
+      <ParallaxMedia clip={false}>
+        <p>支持长臂猿保护</p>
+      </ParallaxMedia>,
+    );
+
+    const content = screen.getByText("支持长臂猿保护");
+    expect(content.parentElement).toHaveClass("parallax-media__layer--content");
+    expect(content.parentElement?.parentElement).toHaveClass(
+      "parallax-media--unclipped",
+    );
+  });
 });

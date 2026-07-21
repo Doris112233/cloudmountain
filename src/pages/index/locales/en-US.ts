@@ -38,8 +38,10 @@ export default {
   "home.description":
     "Our team unites rich experience in both evidence-based and community-based conservation to protect all gibbon species in China, their forest ecosystems, and the diverse wildlife that shares these habitats.",
   "home.support": "Support Us",
-  "home.support.content":
-    "All of your donations will go directly toward supporting our gibbon conservation efforts, including habitat restoration, population monitoring, and improving the lives of gibbons living outside protected areas.There are countless ways to support gibbon conservation, and donating might just be the simplest one.",
+  "home.support.content.1":
+    "All of your donations will go directly toward supporting our gibbon conservation efforts, including habitat restoration, population monitoring, and improving the lives of gibbons living outside protected areas",
+  "home.support.content.2":
+    "Supporting gibbon conservation has countless ways, and donating might just be the simplest one.",
   "home.canteen.sub":
     "Studies on diets and foraging behavior of the Skywalker Hoolock Gibbon",
   "home.empower.sub": "Protecting Gibbon together with the Lisu community",

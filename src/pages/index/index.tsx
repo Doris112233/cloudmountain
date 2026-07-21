@@ -223,9 +223,10 @@ const Index: React.FC = () => {
         </div>
       </div>
       <Reveal className="section-support" direction="none">
-        <ParallaxMedia className="support-content" amount={18}>
+        <ParallaxMedia className="support-content" amount={18} clip={false}>
           <div className="content-desc support-desc">
-            <h2>{intl.formatMessage({ id: "home.support.content" })}</h2>
+            <h2>{intl.formatMessage({ id: "home.support.content.1" })}</h2>
+            <h2>{intl.formatMessage({ id: "home.support.content.2" })}</h2>
           </div>
           <div className="content-button-container">
             <Button className="content-button">
