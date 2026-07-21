@@ -1,6 +1,7 @@
 import { act, cleanup, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Reveal from "./Reveal";
+import ParallaxMedia from "./ParallaxMedia";
 import { resetRevealObservers } from "./revealObserver";
 
 type ObserverCallback = IntersectionObserverCallback;
@@ -70,5 +71,21 @@ describe("motion primitives", () => {
 
     render(<Reveal>无动画内容</Reveal>);
     expect(screen.getByText("无动画内容")).toHaveClass("is-visible");
+  });
+
+  it("keeps a fixed frame around an overscanned parallax layer", () => {
+    render(
+      <ParallaxMedia amount={16}>
+        <img src="hero.jpg" alt="Hero" />
+      </ParallaxMedia>,
+    );
+
+    const image = screen.getByRole("img", { name: "Hero" });
+    expect(image.parentElement).toHaveClass(
+      "parallax-media__layer",
+      "parallax-media__layer--y",
+    );
+    expect(image.parentElement).toHaveStyle("--parallax-overscan: 40px");
+    expect(image.parentElement?.parentElement).toHaveClass("parallax-media");
   });
 });

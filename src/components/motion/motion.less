@@ -34,10 +34,27 @@
 }
 
 .parallax-media {
+  position: relative;
+  overflow: hidden;
+}
+
+.parallax-media__layer {
   --parallax-x: 0px;
   --parallax-y: 0px;
+  width: 100%;
+  height: 100%;
   transform: translate3d(var(--parallax-x), var(--parallax-y), 0);
   will-change: transform;
+}
+
+.parallax-media__layer--y {
+  height: calc(100% + var(--parallax-overscan));
+  margin-top: calc(var(--parallax-overscan) / -2);
+}
+
+.parallax-media__layer--x {
+  width: calc(100% + var(--parallax-overscan));
+  margin-left: calc(var(--parallax-overscan) / -2);
 }
 
 .motion-auto-reveal {
@@ -56,7 +73,7 @@
 @media (prefers-reduced-motion: reduce) {
   .motion-reveal,
   .motion-reveal.is-visible,
-  .parallax-media {
+  .parallax-media__layer {
     opacity: 1;
     transform: none;
     transition: none;

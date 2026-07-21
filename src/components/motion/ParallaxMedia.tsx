@@ -72,8 +72,18 @@ const ParallaxMedia = ({
   }, [amount, axis, reducedMotion, visible]);
 
   return (
-    <div ref={ref} className={`parallax-media ${className}`} style={style}>
-      {children}
+    <div className={`parallax-media ${className}`} style={style}>
+      <div
+        ref={ref}
+        className={`parallax-media__layer parallax-media__layer--${axis}`}
+        style={
+          {
+            "--parallax-overscan": `${amount * 2 + 8}px`,
+          } as CSSProperties
+        }
+      >
+        {children}
+      </div>
     </div>
   );
 };

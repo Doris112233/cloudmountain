@@ -70,6 +70,16 @@ index index.html;
 location / {
     try_files $uri $uri/ /index.html;
 }
+
+location = /index.html {
+    add_header Cache-Control "no-cache, no-store, must-revalidate" always;
+    expires -1;
+}
+
+location = /release.json {
+    add_header Cache-Control "no-cache, no-store, must-revalidate" always;
+    expires -1;
+}
 ```
 
 检查并重新加载配置：

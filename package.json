@@ -6,7 +6,7 @@
   },
   "scripts": {
     "start": "max dev",
-    "build": "max build",
+    "build": "max build && node scripts/copy-static-assets.mjs",
     "postinstall": "max setup",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "lint": "max lint --eslint-only",

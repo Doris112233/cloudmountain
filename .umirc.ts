@@ -21,7 +21,7 @@ export default defineConfig({
     defaultPrefetchTimeout: 80,
   },
   esbuildMinifyIIFE: true,
-  favicons: ["/favicon.ico"],
+  favicons: ["/favicon.ico?v=20260721"],
   routes: [
     {
       path: "/",

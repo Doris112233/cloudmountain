@@ -34,6 +34,15 @@ jobs:
       - name: Run quality gate
         run: npm run check
 
+      - name: Stamp release metadata
+        shell: bash
+        run: |
+          printf '{"commit":"%s","run":"%s","builtAt":"%s"}\n' \
+            "${GITHUB_SHA}" \
+            "${GITHUB_RUN_NUMBER}" \
+            "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+            > dist/release.json
+
       - name: Save production bundle
         uses: actions/upload-artifact@v7
         with:
@@ -158,6 +167,8 @@ jobs:
           verify() {
             homepage="$(curl --fail --silent --show-error --location --retry 4 --retry-delay 2 "${PRODUCTION_URL}/?deployment=${RELEASE_ID}")"
             grep -q 'id="root"' <<< "${homepage}"
+            release_metadata="$(curl --fail --silent --show-error --location --retry 4 --retry-delay 2 "${PRODUCTION_URL}/release.json?deployment=${RELEASE_ID}")"
+            grep -q "\"commit\":\"${GITHUB_SHA}\"" <<< "${release_metadata}"
             curl --fail --silent --show-error --location --retry 4 --retry-delay 2 \
               --output /dev/null "${PRODUCTION_URL}/programs/overview?deployment=${RELEASE_ID}"
             asset_path="$(grep -oE 'src="[^"]+\.js"' <<< "${homepage}" | head -n 1 | cut -d '"' -f 2)"
