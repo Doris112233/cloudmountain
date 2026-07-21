@@ -53,3 +53,9 @@ https://static-1314371099.cos.ap-beijing.myqcloud.com/
 ## 发布检查
 
 提交发布版本前运行 `npm run check`，并手动检查中英文切换、长臂猿档案音频、项目视频、报告预览与下载、捐赠轮播以及移动端布局。
+
+## 自动部署
+
+push 或 merge 到 `main` 后，GitHub Actions 会在 Node.js 20 环境执行完整质量检查和构建，再将 `dist/` 原子部署到腾讯云 Nginx 服务器。服务器不需要 Node.js 或项目 npm 依赖；发布失败时会自动恢复上一版本。
+
+首次启用需要创建服务器 `deploy` 用户、调整 Nginx root，并配置 GitHub Production Environment。完整初始化、Secrets、发布和回滚步骤见 [腾讯云自动部署文档](docs/deployment.md)。
