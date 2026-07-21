@@ -20,10 +20,10 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Use Node.js 20
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 20
           cache: npm
@@ -35,7 +35,7 @@ jobs:
         run: npm run check
 
       - name: Save production bundle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: cloudmountain-${{ github.sha }}
           path: dist/
@@ -60,7 +60,7 @@ jobs:
       PRODUCTION_URL: ${{ vars.PRODUCTION_URL }}
     steps:
       - name: Download production bundle
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: cloudmountain-${{ github.sha }}
           path: dist
@@ -171,25 +171,28 @@ jobs:
               --output /dev/null "${asset_url}"
           }
 
-          if ! verify; then
-            echo "Production verification failed; restoring the previous release" >&2
-            if [[ -z "${PREVIOUS_RELEASE}" ]]; then
-              echo "No previous release is available for rollback" >&2
-              exit 1
-            fi
-            ssh "${ssh_options[@]}" "${remote}" bash -s -- "${DEPLOY_PATH}" "${PREVIOUS_RELEASE}" <<'REMOTE'
-            set -euo pipefail
-            deploy_path="$1"
-            previous_release="$2"
-            [[ "${deploy_path}" == "/www/wwwroot/cloudmountain-deploy" || "${deploy_path}" == "/var/www/cloudmountain" ]]
-            [[ "${previous_release}" == "${deploy_path}/releases/"* ]]
-            test -s "${previous_release}/index.html"
-            rm -f "${deploy_path}/current.rollback"
-            ln -s "${previous_release}" "${deploy_path}/current.rollback"
-            mv -Tf "${deploy_path}/current.rollback" "${deploy_path}/current"
-            REMOTE
+          if verify; then
+            exit 0
+          fi
+
+          echo "Production verification failed; restoring the previous release" >&2
+          if [[ -z "${PREVIOUS_RELEASE}" ]]; then
+            echo "No previous release is available for rollback" >&2
             exit 1
           fi
+
+          ssh "${ssh_options[@]}" "${remote}" bash -s -- "${DEPLOY_PATH}" "${PREVIOUS_RELEASE}" <<'REMOTE'
+          set -euo pipefail
+          deploy_path="$1"
+          previous_release="$2"
+          [[ "${deploy_path}" == "/www/wwwroot/cloudmountain-deploy" || "${deploy_path}" == "/var/www/cloudmountain" ]]
+          [[ "${previous_release}" == "${deploy_path}/releases/"* ]]
+          test -s "${previous_release}/index.html"
+          rm -f "${deploy_path}/current.rollback"
+          ln -s "${previous_release}" "${deploy_path}/current.rollback"
+          mv -Tf "${deploy_path}/current.rollback" "${deploy_path}/current"
+          REMOTE
+          exit 1
 
       - name: Remove old releases
         shell: bash
