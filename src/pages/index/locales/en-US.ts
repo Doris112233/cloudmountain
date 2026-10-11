@@ -209,7 +209,7 @@ export default {
   "programs.overview.public": "Science outreach and Public Engagement",
   "programs.overview.learn": "Learn More",
 
-  "protect.archive.listen": "Listen",
+  "protect.archive.listen": "Song",
   "protect.archive.name": "Scientific Name",
   "protect.archive.taxonomy": "Taxonomy",
   "protect.archive.body": "Shape",
@@ -220,6 +220,12 @@ export default {
   "protect.archive.range": "Range",
   "protect.archive.number": "Number",
   "protect.archive.feature": "Features",
+  "protect.archive.title": "Gibbon archives",
+  "protect.archive.navLabel": "Gibbon species",
+  "protect.archive.playing": "Playing",
+  "protect.archive.photos": "Photo",
+  "protect.archive.prev": "Previous",
+  "protect.archive.next": "Next",
 
   "programs.intro": "Project Introduction",
   "programs.time": "Project Time",

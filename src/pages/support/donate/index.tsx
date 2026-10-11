@@ -53,7 +53,7 @@ const Donate: React.FC = () => {
   };
 
   return (
-    <div className="full-page">
+    <div className="donate-page">
       <div className="donate-container">{renderSwiper()}</div>
     </div>
   );

@@ -1,3 +1,5 @@
+import hoolockHoolockAudio from "../../../public/Hoolock_hoolock.wav";
+
 export const normalizeArchiveId = (
   value: string | null | undefined,
   itemCount: number,
@@ -8,15 +10,15 @@ export const normalizeArchiveId = (
   return Number.isSafeInteger(parsed) && parsed < itemCount ? parsed : 0;
 };
 
+const cosAudioUrl = (filename: string) =>
+  `https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/${filename}`;
+
 export const archiveAudioUrls = [
-  "Hoolock_tianxing.mp3",
-  "Nomascus_hainanus.mp3",
-  "Nomascus_nasutus.mp3",
-  "Nomascus_concolor.mp3",
-  "Nomascus_leucogenys.mp3",
-  "Hylobates_lar.mp3",
-  "Hoolock_hoolock.mp3",
-].map(
-  (filename) =>
-    `https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/${filename}`,
-);
+  cosAudioUrl("Hoolock_tianxing.mp3"),
+  cosAudioUrl("Nomascus_hainanus.mp3"),
+  cosAudioUrl("Nomascus_nasutus.mp3"),
+  cosAudioUrl("Nomascus_concolor.mp3"),
+  cosAudioUrl("Nomascus_leucogenys.mp3"),
+  cosAudioUrl("Hylobates_lar.mp3"),
+  hoolockHoolockAudio,
+];

@@ -1,29 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useIntl, useLocation } from "@umijs/max";
-import { Button, Tabs, Card, Descriptions, Typography } from "antd";
-import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
 import data from "../../../data/archive";
 import dataArchaeo from "../../../data/archaeo";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
 import "./index.less";
-import { SoundOutlined, PauseOutlined } from "@ant-design/icons";
+import {
+  ArrowLeftOutlined,
+  ArrowRightOutlined,
+  PauseOutlined,
+  SoundOutlined,
+} from "@ant-design/icons";
 import { ArchiveAudioController } from "./audioController";
 import { archiveAudioUrls, normalizeArchiveId } from "./utils";
 import ProgressiveImage from "../../../components/ProgressiveImage";
 
-const ImgViewer = (props: { src: string; alt: string }) => {
-  return (
-    <ProgressiveImage
-      src={props.src}
-      alt={props.alt}
-      wrapperClassName="archive-progressive-media"
-      style={{ height: "30rem", width: "100%" }}
-      objectFit="contain"
-    />
-  );
-};
+const pad = (value: number) => String(value).padStart(2, "0");
+
+// The weight/length messages are shared with inline copy and end in a colon.
+const asLabel = (value: string) => value.replace(/[:：]\s*$/, "").trim();
 
 export default () => {
   const location = useLocation();
@@ -32,6 +25,7 @@ export default () => {
   const [selected, setSelected] = useState<number>(
     normalizeArchiveId(queryId, data.length),
   );
+  const [photoIndex, setPhotoIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const audioController = useRef<ArchiveAudioController | null>(null);
 
@@ -45,24 +39,71 @@ export default () => {
 
   useEffect(() => () => audioController.current?.destroy(), []);
 
-  const { Item } = Descriptions;
-  const { Text } = Typography;
+  const total = data.length;
+  const species = data[selected];
+  const speciesName = (index: number) =>
+    intl.formatMessage({ id: data[index].name });
+  const photo = species.images[photoIndex] ?? species.images[0];
 
-  const descItemStyle = {
-    color: "#89c24b",
+  const selectSpecies = (index: number, focus = false) => {
+    const next = (index + total) % total;
+    audioController.current?.stop();
+    setSelected(next);
+    setPhotoIndex(0);
+    if (focus) document.getElementById(`archive-tab-${next}`)?.focus();
   };
 
-  const changeTab = (key: string) => {
-    audioController.current?.stop();
-    setSelected(normalizeArchiveId(key, data.length));
+  const handleTabKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      event.preventDefault();
+      selectSpecies(selected + 1, true);
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      event.preventDefault();
+      selectSpecies(selected - 1, true);
+    }
   };
 
   const playAudio = () => {
     void audioController.current?.toggle(selected);
   };
 
+  const facts = [
+    {
+      key: "iucn",
+      label: "protect.archive.iucn",
+      value: intl.formatMessage({ id: species.IUCN }),
+      wide: true,
+    },
+    {
+      key: "status",
+      label: "protect.archive.status",
+      value: intl.formatMessage({ id: species.chineseLevel }),
+    },
+    {
+      key: "number",
+      label: "protect.archive.number",
+      value: intl.formatMessage({ id: species.amount }),
+    },
+    {
+      key: "weight",
+      label: "protect.archive.weight",
+      value: `${species.body.weight} kg`,
+    },
+    {
+      key: "length",
+      label: "protect.archive.length",
+      value: `${species.body.height} cm`,
+    },
+    {
+      key: "range",
+      label: "protect.archive.range",
+      value: intl.formatMessage({ id: species.distribution }),
+      wide: true,
+    },
+  ];
+
   return (
-    <div className="full-page">
+    <div className="archive-page">
       <section className="section-archeology">
         <div className="section-archeology-container"></div>
         <div className="section-archeology-header">
@@ -88,188 +129,197 @@ export default () => {
           </div>
         </div>
       </section>
-      <section className="section-archive">
-        <Grid
-          container
-          direction="column"
-          justifyContent="flex-start"
-          alignItems="center"
-        >
-          <Grid
-            container
-            item
-            xs={12}
-            sm={10}
-            md={8}
-            direction="column"
-            justifyContent="flex-start"
-            alignItems="center"
+
+      <section
+        className="section-archive"
+        aria-labelledby="archive-section-title"
+      >
+        <div className="archive-section-header">
+          <h2 id="archive-section-title">
+            {intl.formatMessage({ id: "protect.archive.title" })}
+          </h2>
+        </div>
+
+        <div className="archive-dossier">
+          <nav
+            className="archive-species-nav"
+            aria-label={intl.formatMessage({ id: "protect.archive.navLabel" })}
           >
-            <Grid item xs={2} sm={3} md={3}>
-              <Button
-                type="primary"
-                className={`archive-audio-button ${isPlaying ? "is-playing" : ""}`}
-                style={{ marginTop: 10 }}
-                onClick={playAudio}
-                icon={isPlaying ? <PauseOutlined /> : <SoundOutlined />}
-              >
-                {intl.formatMessage({ id: "protect.archive.listen" })}
-              </Button>
-            </Grid>
-            <Grid
-              item
-              xs={10}
-              sm={9}
-              md={9}
-              style={{ minWidth: 0, width: "100%" }}
+            <div
+              role="tablist"
+              aria-orientation="vertical"
+              className="archive-species-list"
+              onKeyDown={handleTabKeyDown}
             >
-              <div className="tabs-container">
-                <Tabs
-                  defaultActiveKey="0"
-                  onChange={changeTab}
-                  activeKey={selected.toString()}
-                  style={{ marginTop: 30 }}
-                  tabPosition="top"
-                  type="card"
-                  renderTabBar={(props, DefaultTabBar) => (
-                    <div style={{ minWidth: "max-content" }}>
-                      <DefaultTabBar {...props} />
-                    </div>
-                  )}
-                  items={data.map((item) => ({
-                    key: item.key.toString(),
-                    label: intl.formatMessage({ id: item.name }),
-                    children: null,
-                  }))}
-                />
-              </div>
-            </Grid>
-          </Grid>
-          <Grid
+              {data.map((item, index) => {
+                const active = index === selected;
+                return (
+                  <button
+                    key={item.key}
+                    type="button"
+                    role="tab"
+                    id={`archive-tab-${index}`}
+                    aria-selected={active}
+                    aria-controls="archive-species-panel"
+                    tabIndex={active ? 0 : -1}
+                    className={`archive-species-tab ${active ? "is-active" : ""}`}
+                    onClick={() => selectSpecies(index)}
+                  >
+                    <span className="archive-species-tab__index">
+                      {pad(index + 1)}
+                    </span>
+                    <span className="archive-species-tab__name">
+                      {intl.formatMessage({ id: item.name })}
+                    </span>
+                    <span className="archive-species-tab__latin">
+                      {item.latin}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </nav>
+
+          <article
             key={selected}
-            item
-            xs={12}
-            container
-            justifyContent="center"
-            alignItems="flex-start"
-            spacing={2}
-            className="archive-content-transition"
+            id="archive-species-panel"
+            role="tabpanel"
+            aria-labelledby={`archive-tab-${selected}`}
+            className="archive-species archive-content-transition"
           >
-            <Grid item xs={12} sm={6} md={5} className="archiveItem">
-              <Card>
-                <Swiper>
-                  {data[selected].images.map((image) => (
-                    <SwiperSlide key={image}>
-                      <Container maxWidth="sm" style={{ textAlign: "center" }}>
-                        <ImgViewer
-                          src={image}
-                          alt={intl.formatMessage({ id: data[selected].name })}
-                        />
-                      </Container>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </Card>
-            </Grid>
-            <Grid item xs={12} sm={6} md={5} className="archiveItem">
-              <Card>
-                <Descriptions
-                  title={intl.formatMessage({ id: data[selected].name })}
-                  column={1}
+            <div className="archive-species__media">
+              <figure className="archive-photo">
+                <span
+                  className="archive-photo__backdrop"
+                  style={{ backgroundImage: `url("${photo}")` }}
+                  aria-hidden="true"
+                />
+                <ProgressiveImage
+                  key={photo}
+                  src={photo}
+                  alt={speciesName(selected)}
+                  wrapperClassName="archive-photo__media"
+                  objectFit="contain"
+                />
+              </figure>
+              {species.images.length > 1 && (
+                <div
+                  className="archive-photo-thumbs"
+                  role="group"
+                  aria-label={intl.formatMessage({
+                    id: "protect.archive.photos",
+                  })}
                 >
-                  <Item
-                    label={
-                      <div style={descItemStyle}>
-                        {intl.formatMessage({ id: "protect.archive.name" })}
-                      </div>
-                    }
+                  {species.images.map((image, index) => (
+                    <button
+                      key={image}
+                      type="button"
+                      className={`archive-photo-thumb ${
+                        index === photoIndex ? "is-active" : ""
+                      }`}
+                      aria-pressed={index === photoIndex}
+                      aria-label={`${intl.formatMessage({
+                        id: "protect.archive.photos",
+                      })} ${index + 1}`}
+                      onClick={() => setPhotoIndex(index)}
+                    >
+                      <ProgressiveImage
+                        src={image}
+                        alt=""
+                        objectFit="cover"
+                        aspectRatio="1"
+                        wrapperClassName="archive-photo-thumb__media"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="archive-species__body">
+              <p className="archive-species__counter">
+                <span>{pad(selected + 1)}</span> / {pad(total)}
+              </p>
+              <h2 className="archive-species__name">{speciesName(selected)}</h2>
+              <p className="archive-species__latin">{species.latin}</p>
+              <p className="archive-species__taxonomy">
+                {intl.formatMessage({ id: species.classification.family })}
+                <span aria-hidden="true"> · </span>
+                {intl.formatMessage({ id: species.classification.genus })}
+              </p>
+
+              <button
+                type="button"
+                className={`archive-audio-button ${isPlaying ? "is-playing" : ""}`}
+                aria-pressed={isPlaying}
+                onClick={playAudio}
+              >
+                <span className="archive-audio-button__icon" aria-hidden="true">
+                  {isPlaying ? <PauseOutlined /> : <SoundOutlined />}
+                </span>
+                <span className="archive-audio-button__label">
+                  {intl.formatMessage({
+                    id: isPlaying
+                      ? "protect.archive.playing"
+                      : "protect.archive.listen",
+                  })}
+                </span>
+                <span className="archive-audio-button__bars" aria-hidden="true">
+                  <i />
+                  <i />
+                  <i />
+                  <i />
+                </span>
+              </button>
+
+              <dl className="archive-facts">
+                {facts.map((fact) => (
+                  <div
+                    key={fact.key}
+                    className={`archive-fact ${fact.wide ? "archive-fact--wide" : ""}`}
                   >
-                    <i>{data[selected].latin}</i>
-                  </Item>
-                  <Item
-                    label={
-                      <div style={descItemStyle}>
-                        {intl.formatMessage({ id: "protect.archive.taxonomy" })}
-                      </div>
-                    }
-                  >
-                    <Text>
-                      {intl.formatMessage({
-                        id: data[selected].classification.family,
-                      })}
-                      &nbsp;
-                      {intl.formatMessage({
-                        id: data[selected].classification.genus,
-                      })}
-                    </Text>
-                  </Item>
-                  <Item
-                    label={
-                      <div style={descItemStyle}>
-                        {intl.formatMessage({ id: "protect.archive.body" })}
-                      </div>
-                    }
-                  >
-                    <p>
-                      {intl.formatMessage({ id: "protect.archive.weight" })}
-                      {`${data[selected].body.weight}kg`}
-                      &nbsp;
-                    </p>
-                    <p>
-                      {intl.formatMessage({ id: "protect.archive.length" })}
-                      {`${data[selected].body.height}cm`}
-                    </p>
-                  </Item>
-                  <Item
-                    label={
-                      <div style={descItemStyle}>
-                        {intl.formatMessage({ id: "protect.archive.iucn" })}
-                      </div>
-                    }
-                  >
-                    {intl.formatMessage({ id: data[selected].IUCN })}
-                  </Item>
-                  <Item
-                    label={
-                      <div style={descItemStyle}>
-                        {intl.formatMessage({ id: "protect.archive.status" })}
-                      </div>
-                    }
-                  >
-                    {intl.formatMessage({ id: data[selected].chineseLevel })}
-                  </Item>
-                  <Item
-                    label={
-                      <div style={descItemStyle}>
-                        {intl.formatMessage({ id: "protect.archive.range" })}
-                      </div>
-                    }
-                  >
-                    {intl.formatMessage({ id: data[selected].distribution })}
-                  </Item>
-                  <Item
-                    label={
-                      <div style={descItemStyle}>
-                        {intl.formatMessage({ id: "protect.archive.number" })}
-                      </div>
-                    }
-                  >
-                    {intl.formatMessage({ id: data[selected].amount })}
-                  </Item>
-                  <Item
-                    label={
-                      <div style={descItemStyle}>
-                        {intl.formatMessage({ id: "protect.archive.feature" })}
-                      </div>
-                    }
-                  >
-                    {intl.formatMessage({ id: data[selected].feature })}
-                  </Item>
-                </Descriptions>
-              </Card>
-            </Grid>
-          </Grid>
-        </Grid>
+                    <dt>{asLabel(intl.formatMessage({ id: fact.label }))}</dt>
+                    <dd>{fact.value}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <div className="archive-feature">
+                <h3>{intl.formatMessage({ id: "protect.archive.feature" })}</h3>
+                <p>{intl.formatMessage({ id: species.feature })}</p>
+              </div>
+
+              <div className="archive-species__pager">
+                <button
+                  type="button"
+                  className="archive-pager-button"
+                  onClick={() => selectSpecies(selected - 1)}
+                >
+                  <ArrowLeftOutlined aria-hidden="true" />
+                  <span>
+                    <small>
+                      {intl.formatMessage({ id: "protect.archive.prev" })}
+                    </small>
+                    {speciesName((selected - 1 + total) % total)}
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  className="archive-pager-button archive-pager-button--next"
+                  onClick={() => selectSpecies(selected + 1)}
+                >
+                  <span>
+                    <small>
+                      {intl.formatMessage({ id: "protect.archive.next" })}
+                    </small>
+                    {speciesName((selected + 1) % total)}
+                  </span>
+                  <ArrowRightOutlined aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
       </section>
     </div>
   );

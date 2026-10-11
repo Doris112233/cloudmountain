@@ -110,7 +110,7 @@ const Council: React.FC = () => {
   };
 
   return (
-    <div className="full-page">
+    <div className="council-page">
       <Grid
         container
         direction="column"

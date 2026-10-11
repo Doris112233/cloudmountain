@@ -54,7 +54,15 @@ const BasicLayout = () => {
   };
 
   return (
-    <ConfigProvider theme={{ token: { colorPrimary: "#89c24b" } }}>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#89c24b",
+          // Defined once in global.less so antd and plain CSS stay in sync.
+          fontFamily: "var(--site-font-sans)",
+        },
+      }}
+    >
       <ScrollToTop />
       <Layout className="site-layout">
         <SiteHeader

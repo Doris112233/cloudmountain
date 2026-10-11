@@ -434,7 +434,7 @@ export default {
   "programs.public.outcome.2.3":
     "3. 与缤纷自然、中山大学范朋飞研究团队共同出品的中国第一部长臂猿自然纪录片《天行情歌》在国内外上线，累计播放次数超XXX次",
 
-  "protect.archive.listen": "听声音",
+  "protect.archive.listen": "听鸣唱",
   "protect.archive.name": "学名",
   "protect.archive.taxonomy": "分类",
   // 'protect.archive.family': '科_',
@@ -447,6 +447,12 @@ export default {
   "protect.archive.range": "分布",
   "protect.archive.number": "数量",
   "protect.archive.feature": "特征",
+  "protect.archive.title": "长臂猿档案",
+  "protect.archive.navLabel": "长臂猿物种",
+  "protect.archive.playing": "正在播放",
+  "protect.archive.photos": "照片",
+  "protect.archive.prev": "上一种",
+  "protect.archive.next": "下一种",
 
   "archive.gibbon1.name": "天行长臂猿",
   "archive.gibbon1.family": "长臂猿科",

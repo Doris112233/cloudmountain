@@ -44,7 +44,7 @@ const Index: React.FC = () => {
   ];
 
   return (
-    <div className="full-page">
+    <div className="home-page">
       <div className="section-container section-head home-hero-enter">
         <div className="image-head-section">
           <ParallaxMedia amount={16} className="home-hero-parallax">
