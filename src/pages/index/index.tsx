@@ -115,7 +115,7 @@ const Index: React.FC = () => {
           </div>
           <div className="content-button-container">
             <Button className="content-button">
-              <Link to="/protect/archive">
+              <Link to="/protect/china">
                 <b>{intl.formatMessage({ id: "home.button.learn" })}</b>
               </Link>
             </Button>

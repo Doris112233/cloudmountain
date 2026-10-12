@@ -9,125 +9,14 @@
   margin: -24px 0 50px;
 }
 
-.section-archeology {
-  max-width: 90%;
-  margin: 0 auto 60px auto;
-  padding: 40px 0 0 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-}
-
-.section-archeology-container {
-  max-width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.section-archeology-header {
-  display: inline-block;
-  border-bottom: 4px solid @primary-color;
-  text-align: center;
-  padding: 0 50px 5px 50px;
-  h1 {
-    color: #000;
-    font-size: 25px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    margin: 0;
-    @media (max-width: 767px) {
-      font-size: 20px;
-    }
-  }
-}
-
-.section-archeology-content {
-  display: flex;
-  max-width: 85%;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  @media (max-width: 767px) {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-.text-section {
-  flex: 2;
-  font-size: 15px;
-  line-height: 1.8;
-  text-align: left;
-  justify-content: center;
-  align-items: center;
-  p {
-    color: #000;
-  }
-}
-
-.vertical-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  margin: 0;
-}
-
-.vertical-image img {
-  max-width: 200px;
-  height: auto;
-  border-radius: 8px;
-  padding: 0;
-  margin: 0;
-}
-
-.image-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  margin: 20px 0;
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-.image-row img {
-  width: 400px;
-  height: auto;
-  border-radius: 8px;
-  @media (max-width: 767px) {
-    width: 300px;
-  }
-}
-
-.side-text {
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
-
-// ---------------------------------------------------------------------------
-// Species dossier
-// ---------------------------------------------------------------------------
-
 .section-archive {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 40px 32px 0;
   color: @ink;
 
   @media (max-width: 767px) {
-    padding: 0 16px;
+    padding: 32px 16px 0;
   }
 }
 
@@ -152,13 +41,136 @@
       padding: 0 24px 5px;
     }
   }
+}
 
-  p {
-    margin: 18px 0 0;
-    font-size: 15px;
-    color: @ink-muted;
+// Shared photo frame: a blurred copy of the photo fills the box behind the
+// contained image, so portrait and landscape photos sit in the same frame.
+.photo-frame() {
+  position: relative;
+  overflow: hidden;
+  background: @surface-deep;
+  isolation: isolate;
+  box-shadow: 0 18px 40px -24px fade(#2d3a22, 45%);
+}
+
+.photo-backdrop() {
+  position: absolute;
+  inset: -12%;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(28px) saturate(1.15);
+  opacity: 0.6;
+}
+
+.photo-media() {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+
+  .progressive-media__placeholder {
+    opacity: 0.6;
+  }
+
+  .progressive-media__image {
+    width: 100%;
+    height: 100%;
   }
 }
+
+// Overview grid ----------------------------------------------------------
+
+.archive-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 28px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 36px 24px;
+  }
+}
+
+.archive-card {
+  display: flex;
+  flex-direction: column;
+  color: @ink;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
+  &__photo {
+    .photo-frame();
+    display: block;
+    aspect-ratio: 4 / 5;
+    border-radius: 16px;
+    transition:
+      transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 220ms ease;
+  }
+
+  &__backdrop {
+    .photo-backdrop();
+  }
+
+  &__media {
+    .photo-media();
+  }
+
+  &__index {
+    margin-top: 14px;
+    font-size: 11px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.14em;
+    color: @primary-color;
+  }
+
+  &__name {
+    margin-top: 4px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: @ink;
+    transition: color 180ms ease;
+  }
+
+  &__latin {
+    margin-top: 2px;
+    font-size: 13px;
+    font-style: italic;
+    color: @ink-muted;
+  }
+
+  &__iucn {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: @ink-soft;
+  }
+
+  @media (hover: hover) {
+    &:hover .archive-card__photo {
+      transform: translateY(-4px);
+      box-shadow: 0 26px 44px -22px fade(#2d3a22, 55%);
+    }
+
+    &:hover .archive-card__name {
+      color: darken(@primary-color, 18%);
+    }
+  }
+}
+
+// Species dossier --------------------------------------------------------
 
 .archive-dossier {
   display: grid;
@@ -183,15 +195,53 @@
   }
 }
 
+.archive-species-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 18px 16px;
+  font-size: 16px;
+  font-weight: 700;
+  color: @ink;
+  text-decoration: none;
+  transition: color 180ms ease;
+
+  .anticon {
+    color: @primary-color;
+  }
+
+  &:hover,
+  &:focus {
+    color: darken(@primary-color, 22%);
+    text-decoration: none;
+  }
+
+  @media (max-width: 1024px) {
+    margin-left: 0;
+  }
+}
+
 .archive-species-list {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  margin: 0;
+  padding: 0;
   border-left: 1px solid @line;
+  list-style: none;
+
+  li {
+    display: flex;
+    flex-direction: column;
+  }
 
   @media (max-width: 1024px) {
     flex-direction: row;
     gap: 6px;
+
+    li {
+      flex: 0 0 auto;
+    }
     border-left: 0;
     border-bottom: 1px solid @line;
     overflow-x: auto;
@@ -216,11 +266,17 @@
   background: transparent;
   text-align: left;
   color: @ink-soft;
+  text-decoration: none;
   cursor: pointer;
   transition:
     background-color 180ms ease,
     border-color 180ms ease,
     color 180ms ease;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
 
   &__index {
     font-size: 11px;
@@ -285,55 +341,54 @@
 
 // Panel ----------------------------------------------------------------------
 
+// Desktop: photo beside the text. Phones: name and song button first, then
+// the photo, then the details, so the song is reachable without scrolling.
 .archive-species {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-  gap: 48px;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "media intro"
+    "media details";
+  column-gap: 48px;
   align-items: start;
 
   @media (max-width: 767px) {
     grid-template-columns: minmax(0, 1fr);
-    gap: 28px;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "intro"
+      "media"
+      "details";
+    row-gap: 24px;
   }
+}
+
+.archive-species__intro {
+  grid-area: intro;
+}
+
+.archive-species__media {
+  grid-area: media;
+}
+
+.archive-species__details {
+  grid-area: details;
 }
 
 .archive-photo {
-  position: relative;
+  .photo-frame();
   margin: 0;
   aspect-ratio: 4 / 5;
   border-radius: 18px;
-  overflow: hidden;
-  background: @surface-deep;
-  isolation: isolate;
-  box-shadow: 0 18px 40px -24px fade(#2d3a22, 45%);
 }
 
 .archive-photo__backdrop {
-  position: absolute;
-  inset: -12%;
-  z-index: 0;
-  background-size: cover;
-  background-position: center;
-  filter: blur(28px) saturate(1.15);
-  opacity: 0.6;
+  .photo-backdrop();
 }
 
 .archive-photo__media {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-
-  .progressive-media__placeholder {
-    opacity: 0.6;
-  }
-
-  .progressive-media__image {
-    width: 100%;
-    height: 100%;
-  }
+  .photo-media();
 }
 
 .archive-photo-thumbs {
@@ -493,6 +548,10 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
   margin: 28px 0 0;
+
+  @media (max-width: 767px) {
+    margin-top: 0;
+  }
 }
 
 .archive-fact {
@@ -566,7 +625,13 @@
   font-size: 15px;
   font-weight: 600;
   color: @ink-soft;
+  text-decoration: none;
   cursor: pointer;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
 
   small {
     display: block;

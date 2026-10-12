@@ -1,7 +1,12 @@
 import archiveData from "../../../data/archive";
 import reportStructure from "../../../data/reportStructure";
 import timelineStructure from "../../../data/timelineStructure";
-import { archiveAudioUrls, normalizeArchiveId } from "./utils";
+import {
+  archiveAudioUrls,
+  archivePath,
+  findArchiveIndexBySlug,
+  normalizeArchiveId,
+} from "./utils";
 import { describe, expect, it } from "vitest";
 
 describe("normalizeArchiveId", () => {
@@ -30,6 +35,18 @@ describe("content data integrity", () => {
       expect(item.images.length).toBeGreaterThan(0);
       item.images.forEach((image) => expect(image).toMatch(/^https:\/\//));
     });
+  });
+
+  it("gives every archive its own stable URL", () => {
+    const slugs = archiveData.map((item) => item.slug);
+    expect(new Set(slugs).size).toBe(archiveData.length);
+    slugs.forEach((slug) => expect(slug).toMatch(/^[a-z]+(-[a-z]+)+$/));
+    archiveData.forEach((item, index) => {
+      expect(findArchiveIndexBySlug(item.slug)).toBe(index);
+      expect(archivePath(index)).toBe(`/protect/archive/${item.slug}`);
+    });
+    expect(findArchiveIndexBySlug("not-a-gibbon")).toBe(-1);
+    expect(findArchiveIndexBySlug(undefined)).toBe(-1);
   });
 
   it("keeps report downloads complete and unique", () => {

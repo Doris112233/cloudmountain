@@ -20,7 +20,12 @@ export class ArchiveAudioController {
       this.stop();
       return;
     }
+    await this.play(index);
+  }
 
+  // Plays from the start; if the browser blocks playback (no user gesture
+  // yet) the controller simply reports "not playing".
+  async play(index: number): Promise<void> {
     this.stop();
     const url = this.urls[index];
     if (!url) return;

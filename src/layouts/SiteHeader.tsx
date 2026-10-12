@@ -3,6 +3,10 @@ import { Button, Drawer, Grid, Layout, Menu } from "antd";
 import type { MenuProps } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import logo from "../public/logo.png";
+import archiveData, {
+  archiveBasePath,
+  archiveSpeciesPath,
+} from "../data/archive";
 import ProgressiveImage from "../components/ProgressiveImage";
 
 interface SiteHeaderProps {
@@ -20,7 +24,21 @@ export const createNavigationItems = (
     key: "protect",
     label: translate("menu.protect"),
     children: [
-      { key: "/protect/archive", label: translate("menu.protect.archive") },
+      { key: "/protect/china", label: translate("menu.protect.china") },
+      {
+        key: "archive",
+        label: translate("menu.protect.archive"),
+        children: [
+          {
+            key: archiveBasePath,
+            label: translate("menu.protect.archive.all"),
+          },
+          ...archiveData.map((item) => ({
+            key: archiveSpeciesPath(item.slug),
+            label: translate(item.name),
+          })),
+        ],
+      },
       {
         key: "/protect/knowledge",
         label: translate("menu.protect.knowledge"),
@@ -56,6 +74,27 @@ export const createNavigationItems = (
   },
 ];
 
+// Highlight the menu entry whose path is the current page or one of its
+// sub-pages (e.g. /protect/archive/hoolock-tianxing -> /protect/archive).
+export const resolveSelectedKey = (
+  items: MenuProps["items"],
+  path: string,
+): string => {
+  const keys: string[] = [];
+  const collect = (list: MenuProps["items"]) =>
+    list?.forEach((item) => {
+      if (!item) return;
+      if ("children" in item && item.children) collect(item.children);
+      else if (typeof item.key === "string") keys.push(item.key);
+    });
+  collect(items);
+  return (
+    keys
+      .filter((key) => path === key || path.startsWith(`${key}/`))
+      .sort((a, b) => b.length - a.length)[0] ?? path
+  );
+};
+
 const SiteHeader = ({
   locale,
   currentPath,
@@ -68,6 +107,7 @@ const SiteHeader = ({
   const screens = Grid.useBreakpoint();
   const isDesktop = screens.md;
   const items = createNavigationItems(translate);
+  const selectedKey = resolveSelectedKey(items, currentPath);
 
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 18);
@@ -101,7 +141,7 @@ const SiteHeader = ({
           className="site-menu"
           mode="horizontal"
           items={items}
-          selectedKeys={[currentPath]}
+          selectedKeys={[selectedKey]}
           onClick={navigate}
         />
       ) : (
@@ -123,7 +163,7 @@ const SiteHeader = ({
         <Menu
           mode="inline"
           items={items}
-          selectedKeys={[currentPath]}
+          selectedKeys={[selectedKey]}
           onClick={navigate}
         />
       </Drawer>

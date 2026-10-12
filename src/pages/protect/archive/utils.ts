@@ -1,4 +1,13 @@
 import hoolockHoolockAudio from "../../../public/Hoolock_hoolock.wav";
+import data, { archiveSpeciesPath } from "../../../data/archive";
+
+export { archiveBasePath } from "../../../data/archive";
+
+export const archivePath = (index: number) =>
+  archiveSpeciesPath(data[index].slug);
+
+export const findArchiveIndexBySlug = (slug: string | undefined) =>
+  slug ? data.findIndex((item) => item.slug === slug) : -1;
 
 export const normalizeArchiveId = (
   value: string | null | undefined,

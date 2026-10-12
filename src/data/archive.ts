@@ -1,11 +1,18 @@
 const baseUrl =
   "https://static-1314371099.cos.ap-beijing.myqcloud.com/images/archive/";
 
+export const archiveBasePath = "/protect/archive";
+
+// Each gibbon has its own URL so a QR code can open its dossier directly.
+export const archiveSpeciesPath = (slug: string) =>
+  `${archiveBasePath}/${slug}`;
+
 const dataArchaeo = [
   {
     key: 0,
     name: "archive.gibbon1.name",
     latin: "Hoolock tianxing",
+    slug: "hoolock-tianxing",
     classification: {
       family: "archive.gibbon1.family",
       genus: "archive.gibbon1.genus",
@@ -28,6 +35,7 @@ const dataArchaeo = [
     key: 1,
     name: "archive.gibbon2.name",
     latin: "Nomascus hainanus",
+    slug: "nomascus-hainanus",
     classification: {
       family: "archive.gibbon2.family",
       genus: "archive.gibbon2.genus",
@@ -50,6 +58,7 @@ const dataArchaeo = [
     key: 2,
     name: "archive.gibbon3.name",
     latin: "Nomascus nasutus",
+    slug: "nomascus-nasutus",
     classification: {
       family: "archive.gibbon3.family",
       genus: "archive.gibbon3.genus",
@@ -72,6 +81,7 @@ const dataArchaeo = [
     key: 3,
     name: "archive.gibbon4.name",
     latin: "Nomascus concolor",
+    slug: "nomascus-concolor",
     classification: {
       family: "archive.gibbon4.family",
       genus: "archive.gibbon4.genus",
@@ -94,6 +104,7 @@ const dataArchaeo = [
     key: 4,
     name: "archive.gibbon5.name",
     latin: "Nomascus leucogenys",
+    slug: "nomascus-leucogenys",
     classification: {
       family: "archive.gibbon5.family",
       genus: "archive.gibbon5.genus",
@@ -116,6 +127,7 @@ const dataArchaeo = [
     key: 5,
     name: "archive.gibbon6.name",
     latin: "Hylobates lar",
+    slug: "hylobates-lar",
     classification: {
       family: "archive.gibbon6.family",
       genus: "archive.gibbon6.genus",
@@ -135,6 +147,7 @@ const dataArchaeo = [
     key: 6,
     name: "archive.gibbon7.name",
     latin: "Hoolock hoolock",
+    slug: "hoolock-hoolock",
     classification: {
       family: "archive.gibbon7.family",
       genus: "archive.gibbon7.genus",

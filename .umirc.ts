@@ -29,8 +29,16 @@ export default defineConfig({
       routes: [
         { path: "/", component: "@/pages/index/index" },
         {
+          path: "/protect/china",
+          component: "@/pages/protect/china/index",
+        },
+        {
           path: "/protect/archive",
           component: "@/pages/protect/archive/index",
+        },
+        {
+          path: "/protect/archive/:species",
+          component: "@/pages/protect/archive/species",
         },
         {
           path: "/protect/knowledge",
@@ -68,12 +76,30 @@ export default defineConfig({
         { path: "/us/partner", component: "@/pages/us/partner/index" },
         { path: "/us/contact", component: "@/pages/us/contact/index" },
         { path: "/support/month", component: "@/pages/support/donate/index" },
-        { path: "/gibbon-archives1.html", redirect: "/protect/archive?id=0" },
-        { path: "/gibbon-archives2.html", redirect: "/protect/archive?id=1" },
-        { path: "/gibbon-archives3.html", redirect: "/protect/archive?id=2" },
-        { path: "/gibbon-archives4.html", redirect: "/protect/archive?id=3" },
-        { path: "/gibbon-archives5.html", redirect: "/protect/archive?id=4" },
-        { path: "/gibbon-archives6.html", redirect: "/protect/archive?id=5" },
+        {
+          path: "/gibbon-archives1.html",
+          redirect: "/protect/archive/hoolock-tianxing",
+        },
+        {
+          path: "/gibbon-archives2.html",
+          redirect: "/protect/archive/nomascus-hainanus",
+        },
+        {
+          path: "/gibbon-archives3.html",
+          redirect: "/protect/archive/nomascus-nasutus",
+        },
+        {
+          path: "/gibbon-archives4.html",
+          redirect: "/protect/archive/nomascus-concolor",
+        },
+        {
+          path: "/gibbon-archives5.html",
+          redirect: "/protect/archive/nomascus-leucogenys",
+        },
+        {
+          path: "/gibbon-archives6.html",
+          redirect: "/protect/archive/hylobates-lar",
+        },
       ],
     },
   ],
