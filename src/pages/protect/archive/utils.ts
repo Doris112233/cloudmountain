@@ -1,3 +1,4 @@
+import hoolockTianxingAudio from "../../../public/Hoolock_tianxing.m4a";
 import hoolockHoolockAudio from "../../../public/Hoolock_hoolock.wav";
 import data, { archiveSpeciesPath } from "../../../data/archive";
 
@@ -23,7 +24,7 @@ const cosAudioUrl = (filename: string) =>
   `https://static-1314371099.cos.ap-beijing.myqcloud.com/audio/${filename}`;
 
 export const archiveAudioUrls = [
-  cosAudioUrl("Hoolock_tianxing.mp3"),
+  hoolockTianxingAudio,
   cosAudioUrl("Nomascus_hainanus.mp3"),
   cosAudioUrl("Nomascus_nasutus.mp3"),
   cosAudioUrl("Nomascus_concolor.mp3"),
