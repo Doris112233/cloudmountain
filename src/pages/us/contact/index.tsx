@@ -60,11 +60,6 @@ const Contact: React.FC = () => {
             />
           </Grid>
         </Grid>
-        <Divider>
-          <div className="contact-title">
-            {intl.formatMessage({ id: "us.contact.title" })}
-          </div>
-        </Divider>
         <Grid
           item
           xs={12}

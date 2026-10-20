@@ -449,7 +449,7 @@ export default {
   "protect.archive.range": "分布",
   "protect.archive.number": "数量",
   "protect.archive.feature": "特征",
-  "protect.archive.title": "长臂猿档案",
+  "protect.archive.title": "中国长臂猿档案",
   "protect.archive.navLabel": "长臂猿物种",
   "protect.archive.playing": "正在播放",
   "protect.archive.photos": "照片",

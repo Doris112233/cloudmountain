@@ -1,75 +1,38 @@
 import React from "react";
 import { useIntl } from "@umijs/max";
-import Grid from "@mui/material/Grid";
-import { Divider } from "antd";
 import "./index.less";
-const Tianxing: React.FC = () => {
+
+const items = [
+  {
+    key: "mission",
+    labelId: "about.mission",
+    textId: "about.mission.1",
+    wide: true,
+  },
+  { key: "vision", labelId: "about.vision", textId: "about.vision.1" },
+  { key: "slogan", labelId: "about.slogan", textId: "about.slogan.1" },
+  { key: "value", labelId: "about.value", textId: "about.value.1" },
+  {
+    key: "focusing",
+    labelId: "about.focusing",
+    textId: "about.focusing.1",
+    wide: true,
+  },
+];
+
+const Will: React.FC = () => {
   const intl = useIntl();
 
   return (
-    <Grid
-      container
-      direction="column"
-      justifyContent="center"
-      alignItems="center"
-      spacing={2}
-    >
-      <Grid item container xs={12} sm={10} md={8} alignItems="flex-start">
-        <Divider>
-          <div className="tianxing-title">
-            {intl.formatMessage({ id: "about.mission" })}
-          </div>
-        </Divider>
-      </Grid>
-      <Grid item xs={12} sm={10} md={8}>
-        {intl.formatMessage({ id: "about.mission.1" })}
-      </Grid>
-
-      <Grid item container xs={12} sm={10} md={8} alignItems="flex-start">
-        <Divider>
-          <div className="tianxing-title">
-            {intl.formatMessage({ id: "about.vision" })}
-          </div>
-        </Divider>
-      </Grid>
-      <Grid item xs={12} sm={10} md={8}>
-        {intl.formatMessage({ id: "about.vision.1" })}
-      </Grid>
-
-      <Grid item container xs={12} sm={10} md={8} alignItems="flex-start">
-        <Divider>
-          <div className="tianxing-title">
-            {intl.formatMessage({ id: "about.value" })}
-          </div>
-        </Divider>
-      </Grid>
-      <Grid item xs={12} sm={10} md={8}>
-        {intl.formatMessage({ id: "about.value.1" })}
-      </Grid>
-
-      <Grid item container xs={12} sm={10} md={8} alignItems="flex-start">
-        <Divider>
-          <div className="tianxing-title">
-            {intl.formatMessage({ id: "about.slogan" })}
-          </div>
-        </Divider>
-      </Grid>
-      <Grid item xs={12} sm={10} md={8}>
-        {intl.formatMessage({ id: "about.slogan.1" })}
-      </Grid>
-
-      <Grid item container xs={12} sm={10} md={8} alignItems="flex-start">
-        <Divider>
-          <div className="tianxing-title">
-            {intl.formatMessage({ id: "about.focusing" })}
-          </div>
-        </Divider>
-      </Grid>
-      <Grid item xs={12} sm={10} md={8}>
-        {intl.formatMessage({ id: "about.focusing.1" })}
-      </Grid>
-    </Grid>
+    <dl className="fact-grid will-grid">
+      {items.map((item) => (
+        <div key={item.key} className={`fact ${item.wide ? "fact--wide" : ""}`}>
+          <dt>{intl.formatMessage({ id: item.labelId })}</dt>
+          <dd>{intl.formatMessage({ id: item.textId })}</dd>
+        </div>
+      ))}
+    </dl>
   );
 };
 
-export default Tianxing;
+export default Will;

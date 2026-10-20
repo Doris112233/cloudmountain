@@ -1,10 +1,8 @@
 import React from "react";
 import { getLocale, useIntl } from "@umijs/max";
-import Grid from "@mui/material/Grid";
 import data from "../../../data/partner";
 import ProgressiveImage from "../../../components/ProgressiveImage";
 import "./index.less";
-import Divider from "@mui/material/Divider";
 
 const Partner: React.FC = () => {
   const intl = useIntl();
@@ -29,19 +27,9 @@ const Partner: React.FC = () => {
   }
 
   return (
-    <Grid
-      container
-      direction="column"
-      justifyContent="center"
-      alignItems="center"
+    <div
       className={`partner-container ${isChinese ? "partner-zh" : "partner-en"}`}
     >
-      <div className="col-md-12 partner-title">
-        <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>
-          {intl.formatMessage({ id: "us.partner.title" })}
-        </h2>
-      </div>
-
       <div className="partner-content">
         <p>{intl.formatMessage({ id: "us.partner.desc" })}</p>
         {isEnglish && (
@@ -54,20 +42,18 @@ const Partner: React.FC = () => {
         )}
       </div>
 
-      <Divider />
+      <hr className="partner-divider" />
 
       {isChinese ? (
         // Chinese version - show image
-        <Grid item xs={12} sm={10} md={8}>
-          <div className="partner-image-container">
-            <ProgressiveImage
-              src={data.partner}
-              alt="合作伙伴"
-              className="partner-image"
-              wrapperClassName="partner-progressive-media"
-            />
-          </div>
-        </Grid>
+        <div className="partner-image-container">
+          <ProgressiveImage
+            src={data.partner}
+            alt="合作伙伴"
+            className="partner-image"
+            wrapperClassName="partner-progressive-media"
+          />
+        </div>
       ) : (
         // English version - show partner lists
         <div className="partner-content">
@@ -84,7 +70,7 @@ const Partner: React.FC = () => {
             </div>
           </div>
 
-          <Divider />
+          <hr className="partner-divider" />
 
           <div className="partner-list-section">
             <h3 className="partner-section-title">
@@ -100,7 +86,7 @@ const Partner: React.FC = () => {
           </div>
         </div>
       )}
-    </Grid>
+    </div>
   );
 };
 

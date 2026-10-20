@@ -34,7 +34,7 @@ describe("SiteHeader", () => {
       "/programs/investigation",
       "/programs/community",
       "/programs/public",
-      "/us/overview",
+      "/us",
       "/support/month",
     ]);
   });
@@ -73,6 +73,6 @@ describe("SiteHeader", () => {
     expect(resolveSelectedKey(items, "/programs/overview/detail")).toBe(
       "/programs/overview",
     );
-    expect(resolveSelectedKey(items, "/us/timeline")).toBe("/us/timeline");
+    expect(resolveSelectedKey(items, "/us/timeline")).toBe("/us");
   });
 });

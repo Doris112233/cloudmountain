@@ -1,0 +1,269 @@
+// Shared "dossier" layout: a centred page heading, then a sticky numbered
+// list beside a content panel. Used by the gibbon archive and the About pages.
+// Pages import this with `@import (reference)` for the variables; the rules
+// themselves are loaded once from global.less.
+
+@ink: #1f261a;
+@ink-soft: #4a5443;
+@ink-muted: #8a9480;
+@line: #e3e8dc;
+@surface: #f5f8f0;
+@surface-deep: #e9efe0;
+
+.dossier-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 44px;
+
+  h1,
+  h2 {
+    display: inline-block;
+    margin: 0;
+    padding: 0 50px 5px;
+    border-bottom: 4px solid @primary-color;
+    color: #000;
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    @media (max-width: 767px) {
+      font-size: 20px;
+      padding: 0 24px 5px;
+    }
+  }
+}
+
+.dossier {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 56px;
+  align-items: start;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+}
+
+.dossier-nav {
+  position: sticky;
+  top: 96px;
+
+  @media (max-width: 1024px) {
+    position: static;
+  }
+}
+
+.dossier-nav__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 18px 16px;
+  font-size: 16px;
+  font-weight: 700;
+  color: @ink;
+  text-decoration: none;
+  transition: color 180ms ease;
+
+  .anticon {
+    color: @primary-color;
+  }
+
+  &:hover,
+  &:focus {
+    color: darken(@primary-color, 22%);
+    text-decoration: none;
+  }
+
+  @media (max-width: 1024px) {
+    margin-left: 0;
+  }
+}
+
+.dossier-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid @line;
+  list-style: none;
+
+  li {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: row;
+    gap: 6px;
+
+    li {
+      flex: 0 0 auto;
+    }
+    border-left: 0;
+    border-bottom: 1px solid @line;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.dossier-tab {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  column-gap: 10px;
+  align-items: baseline;
+  margin-left: -1px;
+  padding: 10px 14px 10px 16px;
+  border: 0;
+  border-left: 3px solid transparent;
+  border-radius: 0 12px 12px 0;
+  background: transparent;
+  text-align: left;
+  color: @ink-soft;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
+  &__index {
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.08em;
+    color: @ink-muted;
+  }
+
+  &__name {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: @ink;
+  }
+
+  &__meta {
+    grid-column: 2;
+    font-size: 12px;
+    font-style: italic;
+    color: @ink-muted;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: @surface;
+    }
+  }
+
+  &.is-active {
+    border-left-color: @primary-color;
+    background: fade(@primary-color, 12%);
+
+    .dossier-tab__name {
+      color: darken(@primary-color, 22%);
+    }
+    .dossier-tab__index {
+      color: @primary-color;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    display: inline-flex;
+    flex: 0 0 auto;
+    margin: 0 0 -1px;
+    padding: 10px 14px 12px;
+    border-left: 0;
+    border-bottom: 3px solid transparent;
+    border-radius: 10px 10px 0 0;
+    white-space: nowrap;
+
+    &__index,
+    &__meta {
+      display: none;
+    }
+
+    &.is-active {
+      border-left-color: transparent;
+      border-bottom-color: @primary-color;
+    }
+  }
+}
+
+.dossier-counter {
+  margin: 0;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.16em;
+  color: @ink-muted;
+
+  span {
+    font-weight: 700;
+    color: @primary-color;
+  }
+}
+
+.dossier-panel {
+  min-width: 0;
+  animation: dossier-panel-enter 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes dossier-panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Label / value tiles ------------------------------------------------------
+
+.fact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0 0;
+
+  @media (max-width: 767px) {
+    margin-top: 0;
+  }
+}
+
+.fact {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: @surface;
+
+  dt {
+    margin-bottom: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: @ink-muted;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: @ink;
+  }
+
+  &--wide {
+    grid-column: 1 / -1;
+  }
+}

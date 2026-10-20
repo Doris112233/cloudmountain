@@ -1,20 +1,16 @@
-.partner-total {
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-  width: 80%;
-  align-items: center;
-  justify-content: center;
-  display: flex;
+.partner-container {
+  width: 100%;
+  max-width: 960px;
   margin: 0 auto;
+  padding-bottom: 40px;
 }
 
-.partner-title {
-  text-align: center;
-  margin-bottom: 60px;
-  // padding: 3em 0;
-  border-bottom: 1px solid #e4eaec;
+.partner-divider {
   width: 100%;
+  max-width: 800px;
+  margin: 10px auto 30px;
+  border: 0;
+  border-top: 1px solid #e4eaec;
 }
 
 .partner-content {
@@ -51,7 +47,7 @@
 }
 
 .partner-image {
-  max-width: 50%;
+  width: 100%;
   height: auto;
   display: block;
 }
@@ -96,6 +92,9 @@
     margin-bottom: 8px;
   }
 }
+// The poster is portrait (2251 x 3607); cap its width so it stays readable
+// without turning into a wall on wide screens.
 .partner-progressive-media {
   width: 100%;
+  max-width: 520px;
 }

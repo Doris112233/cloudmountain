@@ -115,22 +115,22 @@ export default () => {
         className="section-archive"
         aria-labelledby="archive-section-title"
       >
-        <div className="archive-section-header">
+        <div className="dossier-header">
           <h2 id="archive-section-title">
             {intl.formatMessage({ id: "protect.archive.title" })}
           </h2>
         </div>
 
-        <div className="archive-dossier">
+        <div className="dossier">
           <nav
-            className="archive-species-nav"
+            className="dossier-nav"
             aria-label={intl.formatMessage({ id: "protect.archive.navLabel" })}
           >
-            <Link to={archiveBasePath} className="archive-species-all">
+            <Link to={archiveBasePath} className="dossier-nav__back">
               <ArrowLeftOutlined aria-hidden="true" />
               {intl.formatMessage({ id: "menu.protect.archive.all" })}
             </Link>
-            <ul className="archive-species-list">
+            <ul className="dossier-list">
               {data.map((item, index) => {
                 const active = index === selected;
                 return (
@@ -138,17 +138,15 @@ export default () => {
                     <Link
                       to={archivePath(index)}
                       aria-current={active ? "page" : undefined}
-                      className={`archive-species-tab ${active ? "is-active" : ""}`}
+                      className={`dossier-tab ${active ? "is-active" : ""}`}
                     >
-                      <span className="archive-species-tab__index">
+                      <span className="dossier-tab__index">
                         {pad(index + 1)}
                       </span>
-                      <span className="archive-species-tab__name">
+                      <span className="dossier-tab__name">
                         {intl.formatMessage({ id: item.name })}
                       </span>
-                      <span className="archive-species-tab__latin">
-                        {item.latin}
-                      </span>
+                      <span className="dossier-tab__meta">{item.latin}</span>
                     </Link>
                   </li>
                 );
@@ -159,10 +157,10 @@ export default () => {
           <article
             key={selected}
             aria-labelledby="archive-species-name"
-            className="archive-species archive-content-transition"
+            className="archive-species dossier-panel"
           >
             <header className="archive-species__intro">
-              <p className="archive-species__counter">
+              <p className="dossier-counter">
                 <span>{pad(selected + 1)}</span> / {pad(total)}
               </p>
               <h2 id="archive-species-name" className="archive-species__name">
@@ -251,11 +249,11 @@ export default () => {
             </div>
 
             <div className="archive-species__details">
-              <dl className="archive-facts">
+              <dl className="fact-grid">
                 {facts.map((fact) => (
                   <div
                     key={fact.key}
-                    className={`archive-fact ${fact.wide ? "archive-fact--wide" : ""}`}
+                    className={`fact ${fact.wide ? "fact--wide" : ""}`}
                   >
                     <dt>{asLabel(intl.formatMessage({ id: fact.label }))}</dt>
                     <dd>{fact.value}</dd>

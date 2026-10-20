@@ -28,16 +28,7 @@ const Timeline: React.FC = () => {
     );
   };
 
-  return (
-    <div className="row example-split">
-      <div className="col-md-12 example-title">
-        <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>
-          {intl.formatMessage({ id: "timeline.title" })}
-        </h2>
-      </div>
-      {newTimeline()}
-    </div>
-  );
+  return <div className="row example-split">{newTimeline()}</div>;
 };
 
 export default Timeline;

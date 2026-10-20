@@ -36,7 +36,7 @@ export default () => {
         className="section-archive"
         aria-labelledby="archive-section-title"
       >
-        <div className="archive-section-header">
+        <div className="dossier-header">
           <h2 id="archive-section-title">{title}</h2>
         </div>
 

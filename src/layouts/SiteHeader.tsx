@@ -64,14 +64,10 @@ export const createNavigationItems = (
       { key: "/programs/public", label: translate("menu.programs.public") },
     ],
   },
-  { key: "/us/overview", label: translate("menu.us.overview") },
-  {
-    key: "support",
-    label: translate("menu.support"),
-    children: [
-      { key: "/support/month", label: translate("menu.support.month") },
-    ],
-  },
+  { key: "/us", label: translate("menu.us.overview") },
+  // A direct link: a dropdown with a single entry made "支持我们" itself
+  // unclickable, so visitors had to hit the one entry inside it.
+  { key: "/support/month", label: translate("menu.support") },
 ];
 
 // Highlight the menu entry whose path is the current page or one of its

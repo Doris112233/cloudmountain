@@ -222,7 +222,7 @@ export default {
   "protect.archive.range": "Range",
   "protect.archive.number": "Number",
   "protect.archive.feature": "Features",
-  "protect.archive.title": "Gibbon Archives",
+  "protect.archive.title": "Gibbon Archives of China",
   "protect.archive.navLabel": "Gibbon species",
   "protect.archive.playing": "Playing",
   "protect.archive.photos": "Photo",

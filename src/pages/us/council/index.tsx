@@ -1,12 +1,11 @@
 import React from "react";
-import { getLocale, useIntl } from "@umijs/max";
+import { getLocale } from "@umijs/max";
 import Grid from "@mui/material/Grid";
 import { Divider, Avatar, Tag } from "antd";
 import "./index.less";
 import getCouncilData from "../../../data/council";
 
 const Council: React.FC = () => {
-  const intl = useIntl();
   const currentLocale = getLocale();
   const data = getCouncilData(currentLocale);
 
@@ -34,7 +33,11 @@ const Council: React.FC = () => {
           </Grid>
           <Grid item xs={12}>
             {person.title.map((item: string) => {
-              return <Tag key={item} color="#F5C16D">{item}</Tag>;
+              return (
+                <Tag key={item} color="#F5C16D">
+                  {item}
+                </Tag>
+              );
             })}
           </Grid>
           <Grid item xs={12}>
@@ -86,7 +89,11 @@ const Council: React.FC = () => {
           </Grid>
           <Grid item>
             {person.title.map((item: string) => {
-              return <Tag key={item} color="#F5C16D">{item}</Tag>;
+              return (
+                <Tag key={item} color="#F5C16D">
+                  {item}
+                </Tag>
+              );
             })}
           </Grid>
           <Grid item>
@@ -118,13 +125,6 @@ const Council: React.FC = () => {
         alignItems="center"
         spacing={2}
       >
-        <Grid item xs={12} style={{ width: "100%" }}>
-          <div className="col-md-12 example-title">
-            <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>
-              {intl.formatMessage({ id: "about.council.title" })}
-            </h2>
-          </div>
-        </Grid>
         <Grid item xs={12}>
           {renderBossCard(data[0])}
         </Grid>
